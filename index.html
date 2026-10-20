@@ -62,6 +62,10 @@ ul{list-style:none}
 .nav-links a:hover::after{transform:scaleX(1)}
 .nav-cta{display:flex;align-items:center;gap:1rem}
 .nav-cta .btn{padding:.62rem 1.35rem;font-size:.85rem}
+.lang-switch{display:inline-flex;align-items:center;background:rgba(148,163,184,.08);border:1px solid var(--line-strong);border-radius:999px;padding:3px}
+.lang-btn{appearance:none;background:none;border:0;cursor:pointer;font:inherit;font-size:.75rem;font-weight:800;letter-spacing:.08em;color:var(--muted);padding:.42rem .72rem;border-radius:999px;transition:color .2s ease,background .25s ease,box-shadow .25s ease}
+.lang-btn:hover{color:var(--text)}
+.lang-btn.active{background:var(--grad);color:#04211a;box-shadow:0 4px 14px -4px rgba(16,185,129,.6)}
 .nav-toggle{display:none;background:none;border:1px solid var(--line-strong);border-radius:10px;padding:.5rem .55rem;cursor:pointer;color:var(--text)}
 .nav-toggle svg{width:20px;height:20px}
 @media(max-width:880px){
@@ -93,6 +97,10 @@ ul{list-style:none}
 .bin-svg{width:100%;height:auto}
 .sensor-ring{animation:sensorPulse 3s ease-in-out infinite}
 @keyframes sensorPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.hero-trash{transform-origin:210px 64px;animation:heroDrop 4.6s cubic-bezier(.55,0,.85,.4) infinite}
+@keyframes heroDrop{0%{transform:translateY(-150px) rotate(-10deg) scale(1.05);opacity:0}12%{opacity:1}72%{transform:translateY(-12px) rotate(5deg) scale(.98);opacity:1}84%{transform:translateY(12px) rotate(8deg) scale(.8);opacity:1}92%{transform:translateY(28px) rotate(9deg) scale(.5);opacity:0}100%{transform:translateY(28px) rotate(9deg) scale(.5);opacity:0}}
+.hero-ping{transform-origin:210px 140px;animation:heroPing 4.6s ease-out infinite}
+@keyframes heroPing{0%,80%{transform:scale(.3);opacity:0}86%{opacity:.55}100%{transform:scale(1.6);opacity:0}}
 .drum-hint{animation:spin 26s linear infinite;transform-origin:210px 148px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:920px){
@@ -138,15 +146,7 @@ ul{list-style:none}
 .drum-spin{animation:anatomySpin 18s linear infinite;transform-origin:380px 300px}
 @keyframes anatomySpin{to{transform:rotate(360deg)}}
 .anat-sensor{animation:sensorPulse 3s ease-in-out infinite}
-.anat-ping{transform-origin:380px 300px;animation:anatPing 3s ease-out infinite}
-@keyframes anatPing{0%,70%{transform:scale(.35);opacity:0}78%{opacity:.5}100%{transform:scale(1.02);opacity:0}}
-.trash{transform-origin:380px 300px;animation:trashDrop 3s cubic-bezier(.55,0,.85,.4) infinite}
-@keyframes trashDrop{
-  0%{transform:translateY(-158px) rotate(-9deg) scale(1.14);opacity:0}
-  12%{opacity:1}
-  68%{opacity:1}
-  100%{transform:translateY(6px) rotate(4deg) scale(.52);opacity:0}
-}
+
 .legend{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
 .legend li{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--muted);font-weight:600}
 .legend .swatch{width:14px;height:14px;border-radius:4px;flex:none}
@@ -206,7 +206,7 @@ ul{list-style:none}
 </style>
 </head>
 <body id="top">
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
 <!-- ============ 1 · NAVBAR ============ -->
 <header class="nav" id="navbar">
@@ -222,17 +222,21 @@ ul{list-style:none}
         <text x="32" y="47.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="15.5" font-weight="900" letter-spacing="1.5" fill="#E2E8F0">TTT</text>
       </svg>
       <span class="brand-name">TTT</span>
-      <span class="brand-tag">Trash to Treasure by HSI</span>
+      <span class="brand-tag" data-i18n="brand.tag">Trash to Treasure by HSI</span>
     </a>
     <nav class="nav-links" id="nav-menu" aria-label="Primary">
-      <a href="#overview">Overview</a>
-      <a href="#how">How It Works</a>
-      <a href="#features">Features</a>
-      <a href="#specs">Specs</a>
-      <a href="#contact">Contact</a>
+      <a href="#overview" data-i18n="nav.overview">Overview</a>
+      <a href="#how" data-i18n="nav.how">How It Works</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#specs" data-i18n="nav.specs">Specs</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary" href="#preorder">Pre-Order</a>
+      <div class="lang-switch" role="group" aria-label="Language / Språk">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+      </div>
+      <a class="btn btn-primary" href="#preorder" data-i18n="nav.preorder">Pre-Order</a>
       <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -255,28 +259,28 @@ ul{list-style:none}
           <circle cx="48.5" cy="31" r="2.1" fill="#F59E0B"/>
           <text x="32" y="47.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="15.5" font-weight="900" letter-spacing="1.5" fill="#E2E8F0">TTT</text>
         </svg>
-        <p style="font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Trash to Treasure<br/><span style="color:var(--teal)">by HSI</span></p>
+        <p style="font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)"><span data-i18n="brand.name">Trash to Treasure</span><br/><span style="color:var(--teal)" data-i18n="brand.byline">by HSI</span></p>
       </div>
-      <span class="kicker"><span class="dot" aria-hidden="true"></span>HSI · Auto Källsortering</span>
-      <h1>Sort waste. <span class="grad">Save the planet.</span> Automatically.</h1>
-      <p class="hero-sub">TTT is a smart rotating waste bin with an AI sensor that reads your waste, rotates to the right compartment, and drops it in — no app, no menus, just clear signals.</p>
+      <span class="kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.kicker">HSI · Automatic Sorting</span></span>
+      <h1 data-i18n="hero.title">Sort waste. <span class="grad">Save the planet.</span> Automatically.</h1>
+      <p class="hero-sub" data-i18n="hero.sub">TTT is a smart rotating waste bin with an AI sensor that reads your waste, rotates to the right compartment, and drops it in — no app, no menus, just clear signals.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#preorder">
-          Pre-Order Now
+          <span data-i18n="cta.now">Pre-Order Now</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
+        <a class="btn btn-ghost" href="#how" data-i18n="cta.see">See how it works</a>
       </div>
       <div class="hero-stats" role="list">
-        <div role="listitem"><strong>3 smart compartments</strong><span>in one compact bin</span></div>
-        <div role="listitem"><strong>~15 s sort cycle</strong><span>scan → rotate → drop</span></div>
-        <div role="listitem"><strong>0 apps, 0 menus</strong><span>light + sound feedback</span></div>
+        <div role="listitem"><strong data-i18n="stat1a">3 smart compartments</strong><span data-i18n="stat1b">in one compact bin</span></div>
+        <div role="listitem"><strong data-i18n="stat2a">~15 s sort cycle</strong><span data-i18n="stat2b">scan → rotate → drop</span></div>
+        <div role="listitem"><strong data-i18n="stat3a">0 apps, 0 menus</strong><span data-i18n="stat3b">light + sound feedback</span></div>
       </div>
     </div>
     <div class="bin-scene" aria-hidden="true">
       <div class="bin-glow"></div>
       <div class="bin-float">
-        <svg class="bin-svg" viewBox="0 0 420 560" role="img" aria-label="TTT rotating smart waste bin with AI sensor on top and three color-coded compartments">
+        <svg class="bin-svg" viewBox="0 0 420 560" role="img" aria-label="TTT rotating smart waste bin with AI sensor on top and three color-coded compartments; a bottle drops into the top" data-i18n-attr="aria-label:bin.aria">
           <defs>
             <linearGradient id="binBody" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stop-color="#1E293B"/>
@@ -290,6 +294,7 @@ ul{list-style:none}
             <linearGradient id="slotBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
             <linearGradient id="slotGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#059669"/></linearGradient>
             <linearGradient id="slotYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDE68A"/><stop offset="1" stop-color="#D97706"/></linearGradient>
+            <linearGradient id="heroTrash" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#60A5FA"/><stop offset=".5" stop-color="#3B82F6"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
           </defs>
           <!-- base + body -->
           <ellipse cx="210" cy="510" rx="100" ry="18" fill="#0D1526" stroke="rgba(148,163,184,.25)"/>
@@ -315,13 +320,22 @@ ul{list-style:none}
           <rect x="202" y="250" width="16" height="88" rx="7" fill="rgba(2,6,23,.5)"/>
           <rect x="236" y="240" width="34" height="108" rx="10" fill="url(#slotYellow)"/>
           <rect x="245" y="250" width="16" height="88" rx="7" fill="rgba(2,6,23,.5)"/>
-          <text x="167" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#93C5FD">PLASTIC</text>
-          <text x="210" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#6EE7B7">METAL</text>
-          <text x="253" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#FDE68A">PAPER</text>
+          <text x="167" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#93C5FD" data-i18n="mat.plastic">PLASTIC</text>
+          <text x="210" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#6EE7B7" data-i18n="mat.metal">METAL</text>
+          <text x="253" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#FDE68A" data-i18n="mat.paper">PAPER</text>
           <!-- lower branding -->
           <line x1="150" y1="404" x2="270" y2="404" stroke="rgba(148,163,184,.2)" stroke-width="1"/>
           <text x="210" y="432" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="900" letter-spacing="4" fill="#64748B">TTT</text>
-          <text x="210" y="450" text-anchor="middle" font-size="8.5" font-weight="600" letter-spacing="2.5" fill="#475569">ROTATING SMART BIN</text>
+          <text x="210" y="450" text-anchor="middle" font-size="8.5" font-weight="600" letter-spacing="2.5" fill="#475569" data-i18n="bin.label">ROTATING SMART BIN</text>
+          <!-- trash dropping into the bin -->
+          <ellipse class="hero-ping" cx="210" cy="140" rx="52" ry="13" fill="none" stroke="#2DD4BF" stroke-width="2"/>
+          <g class="hero-trash">
+            <rect x="201" y="16" width="18" height="12" rx="4" fill="#1D4ED8"/>
+            <rect x="205" y="26" width="10" height="12" fill="#93C5FD"/>
+            <rect x="193" y="36" width="34" height="76" rx="15" fill="url(#heroTrash)"/>
+            <rect x="199" y="44" width="8" height="58" rx="4" fill="#fff" opacity=".28"/>
+            <rect x="193" y="62" width="34" height="22" fill="#0B1120" opacity=".35"/>
+          </g>
         </svg>
       </div>
     </div>
@@ -332,9 +346,9 @@ ul{list-style:none}
 <section class="section" id="how">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">How it works</span>
-      <h2>Three steps. <span class="grad">Zero effort.</span></h2>
-      <p>Drop waste into the top. The sensor reads the material, the motor rotates the drum, and the hatch does the rest — all inside a single compact cylinder.</p>
+      <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+      <h2 data-i18n="how.title">Three steps. <span class="grad">Zero effort.</span></h2>
+      <p data-i18n="how.sub">Drop waste into the top. The sensor reads the material, the motor rotates the drum, and the hatch does the rest — all inside a single compact cylinder.</p>
     </div>
     <div class="steps">
       <article class="step glass reveal" style="--d:.05s">
@@ -348,8 +362,8 @@ ul{list-style:none}
             <path d="M18.3 5.7a9 9 0 0 1 0 12.6"/>
           </svg>
         </div>
-        <h3>Drop it in</h3>
-        <p>The top sensor instantly reads and identifies the material you're dropping — plastic, metal or paper.</p>
+        <h3 data-i18n="how.s1t">Drop it in</h3>
+        <p data-i18n="how.s1p">The top sensor instantly reads and identifies the material you're dropping — plastic, metal or paper.</p>
       </article>
       <div class="connector" aria-hidden="true"></div>
       <article class="step glass reveal" style="--d:.15s">
@@ -360,8 +374,8 @@ ul{list-style:none}
             <path d="M12 4.5V2.5M12 21.5v-2M19.5 12h2M2.5 12h2M17.3 6.7l1.4-1.4M5.3 18.7l1.4-1.4M17.3 17.3l1.4 1.4M5.3 5.3l1.4 1.4"/>
           </svg>
         </div>
-        <h3>AI sorts it</h3>
-        <p>A silent motor and precision gear train rotate the drum to align the correct compartment with the top hatch.</p>
+        <h3 data-i18n="how.s2t">AI sorts it</h3>
+        <p data-i18n="how.s2p">A silent motor and precision gear train rotate the drum to align the correct compartment with the top hatch.</p>
       </article>
       <div class="connector" aria-hidden="true"></div>
       <article class="step glass reveal" style="--d:.25s">
@@ -372,8 +386,8 @@ ul{list-style:none}
             <path d="M1 3h22v5H1zM10 12.5l2 2 4.5-4.5"/>
           </svg>
         </div>
-        <h3>It locks it in</h3>
-        <p>The hatch opens at the right slot, the waste drops into its compartment, and a light + tone confirms the sort.</p>
+        <h3 data-i18n="how.s3t">It locks it in</h3>
+        <p data-i18n="how.s3p">The hatch opens at the right slot, the waste drops into its compartment, and a light + tone confirms the sort.</p>
       </article>
     </div>
   </div>
@@ -383,12 +397,12 @@ ul{list-style:none}
 <section class="section" id="anatomy">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Product anatomy</span>
-      <h2>Inside the <span class="grad">rotating bin</span></h2>
-      <p>One compact cylinder, three compartments. Simple, reliable mechanics doing the heavy lifting — designed in Härryda, Sweden.</p>
+      <span class="eyebrow" data-i18n="anato.eyebrow">Product anatomy</span>
+      <h2 data-i18n="anato.title">Inside the <span class="grad">rotating bin</span></h2>
+      <p data-i18n="anato.sub">One compact cylinder, three compartments. Simple, reliable mechanics doing the heavy lifting — designed in Härryda, Sweden.</p>
     </div>
     <div class="glass anatomy-wrap reveal" style="--d:.1s">
-      <svg class="anatomy-svg" viewBox="0 0 760 560" role="img" aria-label="Top-down cutaway of the TTT rotating bin: an AI sensor above the opening, a motor and gear turning a three-compartment drum, and a slot hatch. A bottle is shown dropping in.">
+      <svg class="anatomy-svg" viewBox="0 0 760 560" role="img" aria-label="Top-down cutaway of the TTT rotating bin: an AI sensor above the opening, a motor and gear turning a three-compartment drum, and a slot hatch." data-i18n-attr="aria-label:anato.aria">
         <defs>
           <radialGradient id="anatBed" cx="50%" cy="46%" r="60%">
             <stop offset="0" stop-color="#132038"/><stop offset="1" stop-color="#0A1020"/>
@@ -396,9 +410,6 @@ ul{list-style:none}
           <radialGradient id="anatSheen" cx="42%" cy="32%" r="62%">
             <stop offset="0" stop-color="rgba(255,255,255,.11)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/>
           </radialGradient>
-          <linearGradient id="anatTrash" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#60A5FA"/><stop offset=".5" stop-color="#3B82F6"/><stop offset="1" stop-color="#2563EB"/>
-          </linearGradient>
         </defs>
 
         <!-- ambient bed -->
@@ -419,11 +430,11 @@ ul{list-style:none}
           <line x1="380" y1="300" x2="252" y2="374" stroke="#0A1120" stroke-width="4"/>
           <g font-size="11" font-weight="800" letter-spacing="1.2" text-anchor="middle">
             <circle cx="466" cy="233" r="3" fill="#fff" opacity=".85"/>
-            <text x="466" y="254" fill="#EAF2FF">PLASTIC</text>
+            <text x="466" y="254" fill="#EAF2FF" data-i18n="mat.plastic">PLASTIC</text>
             <circle cx="380" cy="396" r="3" fill="#04211A" opacity=".7"/>
-            <text x="380" y="417" fill="#04211A">METAL</text>
+            <text x="380" y="417" fill="#04211A" data-i18n="mat.metal">METAL</text>
             <circle cx="294" cy="233" r="3" fill="#0A1120" opacity=".55"/>
-            <text x="294" y="254" fill="#1E293B">PAPER</text>
+            <text x="294" y="254" fill="#1E293B" data-i18n="mat.paper">PAPER</text>
           </g>
         </g>
         <!-- glass sheen -->
@@ -452,45 +463,42 @@ ul{list-style:none}
         </g>
         <line x1="380" y1="140" x2="380" y2="150" stroke="rgba(45,212,191,.55)" stroke-width="1.5" stroke-dasharray="2 4"/>
 
-        <!-- impact ripple -->
-        <circle class="anat-ping" cx="380" cy="300" r="82" fill="none" stroke="#2DD4BF" stroke-width="2"/>
-
-        <!-- trash dropping into the bin -->
-        <g class="trash">
-          <rect x="372" y="242" width="16" height="12" rx="3" fill="#1D4ED8"/>
-          <rect x="376" y="252" width="8" height="10" fill="#93C5FD"/>
-          <rect x="365" y="260" width="30" height="76" rx="13" fill="url(#anatTrash)"/>
-          <rect x="371" y="268" width="8" height="58" rx="4" fill="#fff" opacity=".28"/>
-          <rect x="365" y="294" width="30" height="24" fill="#0B1120" opacity=".35"/>
-        </g>
 
         <!-- slot hatch (open flap, lower-left rim) -->
         <path d="M298 441 A163 163 0 0 1 227 356" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
         <path d="M289 430 A150 150 0 0 1 239 366" fill="none" stroke="rgba(245,158,11,.5)" stroke-width="2" stroke-linecap="round"/>
 
         <!-- callouts -->
-        <g font-family="Inter, system-ui, sans-serif">
-          <line x1="152" y1="177" x2="357" y2="132" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
-          <circle cx="359" cy="131" r="3.5" fill="#2DD4BF"/>
-          <text x="150" y="181" text-anchor="end" font-size="15" font-weight="600" fill="#E2E8F0">AI sensor classifies the waste</text>
+        <g font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#E2E8F0">
+          <!-- AI sensor · top-left -->
+          <line x1="150" y1="100" x2="346" y2="125" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="349" cy="126" r="3.5" fill="#2DD4BF"/>
+          <text x="148" y="90" text-anchor="end" data-i18n="anato.c1a">AI sensor</text>
+          <text x="148" y="110" text-anchor="end" data-i18n="anato.c1b">classifies the waste</text>
 
-          <line x1="152" y1="452" x2="254" y2="406" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
-          <circle cx="256" cy="404" r="3.5" fill="#2DD4BF"/>
-          <text x="150" y="456" text-anchor="end" font-size="15" font-weight="600" fill="#E2E8F0">Slot hatch opens on cue</text>
+          <!-- slot hatch · bottom-left -->
+          <line x1="150" y1="458" x2="252" y2="408" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="255" cy="406" r="3.5" fill="#2DD4BF"/>
+          <text x="148" y="448" text-anchor="end" data-i18n="anato.c2a">Slot hatch</text>
+          <text x="148" y="468" text-anchor="end" data-i18n="anato.c2b">opens on cue</text>
 
-          <line x1="608" y1="297" x2="412" y2="300" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
-          <circle cx="410" cy="300" r="3.5" fill="#2DD4BF"/>
-          <text x="610" y="304" font-size="15" font-weight="600" fill="#E2E8F0">Motor + gear rotate the drum</text>
+          <!-- motor + gear · mid-right -->
+          <line x1="610" y1="300" x2="420" y2="300" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="417" cy="300" r="3.5" fill="#2DD4BF"/>
+          <text x="612" y="290" data-i18n="anato.c3a">Motor + gear</text>
+          <text x="612" y="310" data-i18n="anato.c3b">rotate the drum</text>
 
-          <line x1="608" y1="357" x2="505" y2="302" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
-          <circle cx="503" cy="301" r="3.5" fill="#2DD4BF"/>
-          <text x="610" y="361" font-size="15" font-weight="600" fill="#E2E8F0">Three rotating compartments</text>
+          <!-- rotating drum · bottom-right -->
+          <line x1="610" y1="452" x2="458" y2="430" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="455" cy="428" r="3.5" fill="#2DD4BF"/>
+          <text x="612" y="442" data-i18n="anato.c4a">Three rotating</text>
+          <text x="612" y="462" data-i18n="anato.c4b">compartments</text>
         </g>
       </svg>
-      <ul class="legend" aria-label="Compartment color code">
-        <li><span class="swatch" style="background:#3B82F6"></span>Blue — Plastic</li>
-        <li><span class="swatch" style="background:#10B981"></span>Green — Metal</li>
-        <li><span class="swatch" style="background:#FACC15"></span>Yellow — Paper</li>
+      <ul class="legend" aria-label="Compartment color code" data-i18n-attr="aria-label:legend.aria">
+        <li><span class="swatch" style="background:#3B82F6"></span><span data-i18n="legend.plastic">Blue — Plastic</span></li>
+        <li><span class="swatch" style="background:#10B981"></span><span data-i18n="legend.metal">Green — Metal</span></li>
+        <li><span class="swatch" style="background:#FACC15"></span><span data-i18n="legend.paper">Yellow — Paper</span></li>
       </ul>
     </div>
   </div>
@@ -500,52 +508,52 @@ ul{list-style:none}
 <section class="section" id="features">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Features</span>
-      <h2>Engineered to <span class="grad">just work</span></h2>
-      <p>Every part earns its place — from the auto-updating AI model to the recycled materials in the shell.</p>
+      <span class="eyebrow" data-i18n="feat.eyebrow">Features</span>
+      <h2 data-i18n="feat.title">Engineered to <span class="grad">just work</span></h2>
+      <p data-i18n="feat.sub">Every part earns its place — from the auto-updating AI model to the recycled materials in the shell.</p>
     </div>
     <div class="features-grid">
       <article class="feature glass reveal" style="--d:.05s">
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 2v3M14 2v3M10 19v3M14 19v3M2 10h3M2 14h3M19 10h3M19 14h3"/></svg>
         </div>
-        <h3>AI Sorting Engine</h3>
-        <p>Real-time material recognition with auto-updating model.</p>
+        <h3 data-i18n="feat.f1t">AI Sorting Engine</h3>
+        <p data-i18n="feat.f1p">Real-time material recognition with auto-updating model.</p>
       </article>
       <article class="feature glass reveal" style="--d:.1s">
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/><path d="M12 2v2" opacity=".7"/></svg>
         </div>
-        <h3>Zero-UI Feedback</h3>
-        <p>Colours, lights &amp; sounds guide you. No screens, no apps.</p>
+        <h3 data-i18n="feat.f2t">Zero-UI Feedback</h3>
+        <p data-i18n="feat.f2p">Colours, lights &amp; sounds guide you. No screens, no apps.</p>
       </article>
       <article class="feature glass reveal" style="--d:.15s">
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 9h6"/><path d="M14 12h4M16 10v4"/></svg>
         </div>
-        <h3>Compact &amp; Space-Saving</h3>
-        <p>Multiple compartments in a single small footprint.</p>
+        <h3 data-i18n="feat.f3t">Compact &amp; Space-Saving</h3>
+        <p data-i18n="feat.f3p">Multiple compartments in a single small footprint.</p>
       </article>
       <article class="feature glass reveal" style="--d:.2s">
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4 16.6 16.6M7.4 7.4 5.6 5.6"/></svg>
         </div>
-        <h3>Simple, Reliable Mechanics</h3>
-        <p>Motor-driven rotation, built to last.</p>
+        <h3 data-i18n="feat.f4t">Simple, Reliable Mechanics</h3>
+        <p data-i18n="feat.f4p">Motor-driven rotation, built to last.</p>
       </article>
       <article class="feature glass reveal" style="--d:.25s">
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12c0 6-4 9-9 9-1.5 0-3-.4-4-1 0-5 2.5-9.5 10-12-1 2-2.5 3.5-5 5 4-2.5 8-3 8-1Z"/><path d="M7 16C9 10 13 7 17 5"/></svg>
         </div>
-        <h3>Sustainable Build</h3>
-        <p>≥ 20% recycled/reusable materials, ethical production.</p>
+        <h3 data-i18n="feat.f5t">Sustainable Build</h3>
+        <p data-i18n="feat.f5p">≥ 20% recycled/reusable materials, ethical production.</p>
       </article>
       <article class="feature glass reveal" style="--d:.3s">
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4.5 5v6c0 5 3.2 8.6 7.5 10.5 4.3-1.9 7.5-5.5 7.5-10.5V5L12 2Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>
         </div>
-        <h3>2-Year Warranty</h3>
-        <p>12 months HSI support + full 2-year guarantee.</p>
+        <h3 data-i18n="feat.f6t">2-Year Warranty</h3>
+        <p data-i18n="feat.f6p">12 months HSI support + full 2-year guarantee.</p>
       </article>
     </div>
   </div>
@@ -555,35 +563,35 @@ ul{list-style:none}
 <section class="section" id="specs">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Specs &amp; delivery</span>
-      <h2>The fine print, <span class="grad">without the fine print</span></h2>
-      <p>Everything that comes in the box — and everything we stand behind.</p>
+      <span class="eyebrow" data-i18n="spec.eyebrow">Specs &amp; delivery</span>
+      <h2 data-i18n="spec.title">The fine print, <span class="grad">without the fine print</span></h2>
+      <p data-i18n="spec.sub">Everything that comes in the box — and everything we stand behind.</p>
     </div>
     <div class="glass specs-card reveal" style="--d:.1s">
       <ul class="specs-list">
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><strong>Delivery</strong><span>Within 1 week · Free shipping · Instant tracking number</span></div>
+          <div><strong data-i18n="spec.d1a">Delivery</strong><span data-i18n="spec.d1b">Within 1 week · Free shipping · Instant tracking number</span></div>
         </li>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><strong>Support</strong><span>12 months from HSI</span></div>
+          <div><strong data-i18n="spec.d2a">Support</strong><span data-i18n="spec.d2b">12 months from HSI</span></div>
         </li>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><strong>Warranty</strong><span>2 years</span></div>
+          <div><strong data-i18n="spec.d3a">Warranty</strong><span data-i18n="spec.d3b">2 years</span></div>
         </li>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><strong>Materials</strong><span>≥ 20% reusable/recyclable</span></div>
+          <div><strong data-i18n="spec.d4a">Materials</strong><span data-i18n="spec.d4b">≥ 20% reusable/recyclable</span></div>
         </li>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><strong>Includes</strong><span>Installation manual + User guide</span></div>
+          <div><strong data-i18n="spec.d5a">Includes</strong><span data-i18n="spec.d5b">Installation manual + User guide</span></div>
         </li>
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          <div><strong>Production</strong><span>Human-rights compliant</span></div>
+          <div><strong data-i18n="spec.d6a">Production</strong><span data-i18n="spec.d6b">Human-rights compliant</span></div>
         </li>
       </ul>
     </div>
@@ -594,22 +602,22 @@ ul{list-style:none}
 <section class="section" id="proof">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Early feedback</span>
-      <h2>People who tried it, <span class="grad">kept it</span></h2>
+      <span class="eyebrow" data-i18n="proof.eyebrow">Early feedback</span>
+      <h2 data-i18n="proof.title">People who tried it, <span class="grad">kept it</span></h2>
     </div>
     <div class="quotes-grid">
       <figure class="quote glass reveal" style="--d:.05s">
-        <p>Finally, recycling that doesn't require a PhD. I drop it in and walk away — it just works.</p>
+        <p data-i18n="proof.q1t">Finally, recycling that doesn't require a PhD. I drop it in and walk away — it just works.</p>
         <footer>
           <span class="avatar" aria-hidden="true">BU</span>
-          <div><strong>Beta user</strong><span>Home pilot program, Spring 2026</span></div>
+          <div><strong data-i18n="proof.q1a">Beta user</strong><span data-i18n="proof.q1b">Home pilot program, Spring 2026</span></div>
         </footer>
       </figure>
       <figure class="quote glass reveal" style="--d:.15s">
-        <p>Our sorting accuracy went from 60% to 97%. The rotating bin paid for itself in fewer missed collections.</p>
+        <p data-i18n="proof.q2t">Our sorting accuracy went from 60% to 97%. The rotating bin paid for itself in fewer missed collections.</p>
         <footer>
           <span class="avatar" aria-hidden="true">OM</span>
-          <div><strong>Office manager</strong><span>32-person office, Gothenburg</span></div>
+          <div><strong data-i18n="proof.q2a">Office manager</strong><span data-i18n="proof.q2b">32-person office, Gothenburg</span></div>
         </footer>
       </figure>
     </div>
@@ -620,9 +628,9 @@ ul{list-style:none}
 <section class="section" id="preorder" style="padding-top:0">
   <div class="container">
     <div class="cta-banner reveal">
-      <h2>Ready to turn your trash into treasure?</h2>
-      <p>Pre-order TTT today — delivered within a week, with free shipping.</p>
-      <a class="btn btn-white" href="#contact">Pre-Order TTT
+      <h2 data-i18n="cta.h2">Ready to turn your trash into treasure?</h2>
+      <p data-i18n="cta.p">Pre-order TTT today — delivered within a week, with free shipping.</p>
+      <a class="btn btn-white" href="#contact"><span data-i18n="cta.btn">Pre-Order TTT</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -644,14 +652,14 @@ ul{list-style:none}
         <text x="32" y="47.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="15.5" font-weight="900" letter-spacing="1.5" fill="#E2E8F0">TTT</text>
       </svg>
       <div>
-        <p style="color:var(--text);font-weight:700;font-size:.9rem">TTT — Trash to Treasure</p>
-        <p>© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden</p>
+        <p style="color:var(--text);font-weight:700;font-size:.9rem" data-i18n="foot.name">TTT — Trash to Treasure</p>
+        <p data-i18n="foot.copy">© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden</p>
       </div>
     </div>
     <nav class="footer-links" aria-label="Footer">
-      <a href="#top">Privacy</a>
-      <a href="#top">Terms</a>
-      <a href="mailto:hello@ttt-hsi.se">Contact</a>
+      <a href="#top" data-i18n="foot.privacy">Privacy</a>
+      <a href="#top" data-i18n="foot.terms">Terms</a>
+      <a href="mailto:hello@ttt-hsi.se" data-i18n="foot.contact">Contact</a>
     </nav>
   </div>
 </footer>
@@ -680,6 +688,121 @@ ul{list-style:none}
     });
   },{threshold:.15,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+
+/* ============ i18n / Language Switch (EN ⇄ SV) ============ */
+(function(){
+  var I18N = {
+    en: {
+      "nav.features":"Features","nav.how":"How it works","nav.specs":"Specs","nav.feedback":"Feedback","nav.preorder":"Pre-Order",
+      "hero.tagline":"AI · Rotating Smart Bin · Auto-Sort",
+      "hero.title":"Stop <span class='grad'>guessing.</span> Start recycling — <span class='grad'>effortlessly.</span>",
+      "hero.sub":"TTT is a rotating smart waste bin that uses AI to identify your material and auto-sorts it into the right compartment. Drop it in and walk away — no apps, no screens.",
+      "hero.btnPreorder":"Pre-Order TTT","hero.btnSpecs":"View Specs","hero.price":"Delivered in 1 week · Free shipping",
+      "hero.stat1a":"98% sorting accuracy","hero.stat1b":"3 material classes",
+      "hero.stat2a":"~15 s sort cycle","hero.stat2b":"scan → rotate → drop",
+      "hero.stat3a":"0 apps, 0 menus","hero.stat3b":"light + sound feedback",
+      "bin.aria":"TTT rotating smart waste bin with AI sensor on top and three color-coded compartments; a bottle drops into the top",
+      "mat.plastic":"PLASTIC","mat.metal":"METAL","mat.paper":"PAPER",
+      "how.eyebrow":"How it works","how.title":"Three steps. <span class='grad'>Zero effort.</span>","how.sub":"Drop waste into the top. The sensor reads the material, the motor rotates the drum, and the hatch does the rest — all inside a single compact cylinder.",
+      "how.s1t":"Drop it in","how.s1p":"The top sensor instantly reads and identifies the material you're dropping — plastic, metal or paper.",
+      "how.s2t":"AI sorts it","how.s2p":"A silent motor and precision gear train rotate the drum to align the correct compartment with the top hatch.",
+      "how.s3t":"It locks it in","how.s3p":"The hatch opens at the right slot, the waste drops into its compartment, and a light + tone confirms the sort.",
+      "anato.eyebrow":"Product anatomy","anato.title":"Inside the <span class='grad'>rotating bin</span>","anato.sub":"One compact cylinder, three compartments. Simple, reliable mechanics doing the heavy lifting — designed in Härryda, Sweden.",
+      "anato.aria":"Top-down cutaway of the TTT rotating bin: an AI sensor above the opening, a motor and gear turning a three-compartment drum, and a slot hatch.",
+      "anato.c1a":"AI sensor","anato.c1b":"classifies the waste","anato.c2a":"Slot hatch","anato.c2b":"opens on cue",
+      "anato.c3a":"Motor + gear","anato.c3b":"rotate the drum","anato.c4a":"Three rotating","anato.c4b":"compartments",
+      "legend.aria":"Compartment color code","legend.plastic":"Blue — Plastic","legend.metal":"Green — Metal","legend.paper":"Yellow — Paper",
+      "feat.eyebrow":"Features","feat.title":"Engineered to <span class='grad'>just work</span>","feat.sub":"Every part earns its place — from the auto-updating AI model to the recycled materials in the shell.",
+      "feat.f1t":"AI Sorting Engine","feat.f1p":"Real-time material recognition with auto-updating model.",
+      "feat.f2t":"Zero-UI Feedback","feat.f2p":"Colours, lights &amp; sounds guide you. No screens, no apps.",
+      "feat.f3t":"Compact &amp; Space-Saving","feat.f3p":"Multiple compartments in a single small footprint.",
+      "feat.f4t":"Simple, Reliable Mechanics","feat.f4p":"Motor-driven rotation, built to last.",
+      "feat.f5t":"Sustainable Build","feat.f5p":"≥ 20% recycled/reusable materials, ethical production.",
+      "feat.f6t":"2-Year Warranty","feat.f6p":"12 months HSI support + full 2-year guarantee.",
+      "spec.eyebrow":"Specs &amp; delivery","spec.title":"The fine print, <span class='grad'>without the fine print</span>","spec.sub":"Everything that comes in the box — and everything we stand behind.",
+      "spec.d1a":"Delivery","spec.d1b":"Within 1 week · Free shipping · Instant tracking number",
+      "spec.d2a":"Support","spec.d2b":"12 months from HSI",
+      "spec.d3a":"Warranty","spec.d3b":"2 years",
+      "spec.d4a":"Materials","spec.d4b":"≥ 20% reusable/recyclable",
+      "spec.d5a":"Includes","spec.d5b":"Installation manual + User guide",
+      "spec.d6a":"Production","spec.d6b":"Human-rights compliant",
+      "proof.eyebrow":"Early feedback","proof.title":"People who tried it, <span class='grad'>kept it</span>",
+      "proof.q1t":"Finally, recycling that doesn't require a PhD. I drop it in and walk away — it just works.","proof.q1a":"Beta user","proof.q1b":"Home pilot program, Spring 2026",
+      "proof.q2t":"Our sorting accuracy went from 60% to 97%. The rotating bin paid for itself in fewer missed collections.","proof.q2a":"Office manager","proof.q2b":"32-person office, Gothenburg",
+      "cta.h2":"Ready to turn your trash into treasure?","cta.p":"Pre-order TTT today — delivered within a week, with free shipping.","cta.btn":"Pre-Order TTT",
+      "foot.name":"TTT — Trash to Treasure","foot.copy":"© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden","foot.privacy":"Privacy","foot.terms":"Terms","foot.contact":"Contact"
+    },
+    sv: {
+      "nav.features":"Funktioner","nav.how":"Så fungerar det","nav.specs":"Specifikationer","nav.feedback":"Omdömen","nav.preorder":"Förbeställ",
+      "hero.tagline":"AI · Roterande smart soptunna · Automatisk sorts",
+      "hero.title":"Sluta <span class='grad'>gissa.</span> Börja återvinna — <span class='grad'>utan ansträngning.</span>",
+      "hero.sub":"TTT är en roterande smart soptunna som använder AI för att identifiera ditt material och automatiskt sortera det i rätt fack. Släng i och gå — inga appar, inga skärmar.",
+      "hero.btnPreorder":"Förbeställ TTT","hero.btnSpecs":"Se specifikationer","hero.price":"Leverans på 1 vecka · Fri frakt",
+      "hero.stat1a":"98 % sortingsprecision","hero.stat1b":"3 materialklasser",
+      "hero.stat2a":"~15 s sortering","hero.stat2b":"skanna → rotera → släpp",
+      "hero.stat3a":"0 appar, 0 menyer","hero.stat3b":"ljus + ljud-feedback",
+      "bin.aria":"TTT roterande smart soptunna med AI-sensor överst och tre färgkodade fack; en flaska släpps in överst",
+      "mat.plastic":"PLAST","mat.metal":"METALL","mat.paper":"PAPP",
+      "how.eyebrow":"Så fungerar det","how.title":"Tre steg. <span class='grad'>Noll ansträngning.</span>","how.sub":"Släng in skräpet överst. Sensorn läser av materialet, motorn roterar trumman och luckan sköter resten — allt inom en enda kompakt cylinder.",
+      "how.s1t":"Släng i det","how.s1p":"Sensorn överst läser och identifierar det material du slänger in — plast, metall eller papper.",
+      "how.s2t":"AI:n sorterar","how.s2p":"En tyst motor och en precisionsgearträng roterar trumman för att justera rätt fack mot övre luckan.",
+      "how.s3t":"Den låser in det","how.s3p":"Luckan öppnas i rätt slits, skräpet faller till rätt fack och ett ljus + ton bekräftar sorteringen.",
+      "anato.eyebrow":"Produktens anatomi","anato.title":"Inuti <span class='grad'>den roterande tunnan</span>","anato.sub":"En kompakt cylinder, tre fack. Enkel och pålitlig mekanik som gör det tunga jobbet — utformad i Härryda, Sverige.",
+      "anato.aria":"Snittvy ovanifrån på TTT:s roterande tunna: en AI-sensor över öppningen, en motor och ett gear som snurrar en trefackad trumma, samt en slitslucka.",
+      "anato.c1a":"AI-sensor","anato.c1b":"klassar skräpet","anato.c2a":"Slitslucka","anato.c2b":"öppnar när den ska",
+      "anato.c3a":"Motor + gear","anato.c3b":"roterar trumman","anato.c4a":"Tre roterande","anato.c4b":"fack",
+      "legend.aria":"Färgkodning av fack","legend.plastic":"Blå — Plast","legend.metal":"Grön — Metall","legend.paper":"Gul — Papp",
+      "feat.eyebrow":"Funktioner","feat.title":"Utformad för att <span class='grad'>bara fungera</span>","feat.sub":"Varje del tjänar sin plats — från den självuppdaterande AI-modellen till de återvunna materialen i skalningen.",
+      "feat.f1t":"AI-sorteringsmotor","feat.f1p":"Materialigenkänning i realtid med självuppdaterande modell.",
+      "feat.f2t":"UI-fri feedback","feat.f2p":"Färger, ljus och ljud guidar dig. Ingen skärm, inga appar.",
+      "feat.f3t":"Kompakt &amp; platsbesparande","feat.f3p":"Flera fack i ett litet fotavtryck.",
+      "feat.f4t":"Enkel, pålitlig mekanik","feat.f4p":"Motordriven rotation, byggd för att hålla.",
+      "feat.f5t":"Hållbar konstruktion","feat.f5p":"Minst 20 % återvunnet/återanvändbart material, etisk produktion.",
+      "feat.f6t":"2 års garanti","feat.f6p":"12 månaders support från HSI + full 2-års garanti.",
+      "spec.eyebrow":"Specifikationer &amp; leverans","spec.title":"Detta är vad du får, <span class='grad'>utan krångel</span>","spec.sub":"Allt som finns i boxen — och allt vi står bakom.",
+      "spec.d1a":"Leverans","spec.d1b":"Inom 1 vecka · Fri frakt · Omedelbart spårningsnummer",
+      "spec.d2a":"Support","spec.d2b":"12 månader från HSI",
+      "spec.d3a":"Garanti","spec.d3b":"2 år",
+      "spec.d4a":"Material","spec.d4b":"Minst 20 % återvunnet/återvinningsbart",
+      "spec.d5a":"Innehållet","spec.d5b":"Monteringsmanual + Användarguide",
+      "spec.d6a":"Produktion","spec.d6b":"I enlighet med mänskliga rättigheter",
+      "proof.eyebrow":"Tidiga omdömen","proof.title":"De som testade det, <span class='grad'>höll kvar</span>",
+      "proof.q1t":"Slutligen, återvinning som inte kräver en forskarutbildning. Jag slänger i och går — det fungerar bara.","proof.q1a":"Beta-användare","proof.q1b":"Bostadspilotprogram, vår 2026",
+      "proof.q2t":"Vår sortingsprecision steg från 60 % till 97 %. Den roterande tunnan betald sig genom färre missade hämtningsdagar.","proof.q2a":"Kontorschef","proof.q2b":"Kontor med 32 personer, Göteborg",
+      "cta.h2":"Redo att förvandla ditt skräp till guld?","cta.p":"Förbeställ TTT idag — levererad inom en vecka, med fri frakt.","cta.btn":"Förbeställ TTT",
+      "foot.name":"TTT — Trash to Treasure","foot.copy":"© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sverige","foot.privacy":"Sekretess","foot.terms":"Villkor","foot.contact":"Kontakta oss"
+    },
+  };
+  var KEY='ttt-lang';
+  var saved=(function(){try{return localStorage.getItem(KEY);}catch(e){return null;}})();
+  var lang=(saved==='sv'||saved==='en')?saved:(navigator.language && navigator.language.toLowerCase().indexOf('sv')===0?'sv':'en');
+  function apply(l){
+    lang=l;
+    var dict=I18N[l]||I18N.en;
+    document.documentElement.setAttribute('lang', l);
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key=el.getAttribute('data-i18n');
+      if(dict[key]!==undefined){ el.innerHTML=dict[key]; }
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(function(el){
+      var pair=el.getAttribute('data-i18n-attr').split(':');
+      if(pair.length===2 && dict[pair[1]]!==undefined){ el.setAttribute(pair[0], dict[pair[1]]); }
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      var on=b.getAttribute('data-lang')===l;
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-pressed',String(on));
+    });
+    try{localStorage.setItem(KEY,l);}catch(e){}
+  }
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.getAttribute('data-lang');
+      if(l!==lang){ apply(l); }
+    });
+  });
+  apply(lang);
 })();
 </script>
 </body>
