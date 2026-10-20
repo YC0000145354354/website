@@ -93,7 +93,7 @@ ul{list-style:none}
 .bin-svg{width:100%;height:auto}
 .sensor-ring{animation:sensorPulse 3s ease-in-out infinite}
 @keyframes sensorPulse{0%,100%{opacity:.55}50%{opacity:1}}
-.drum-hint{animation:spin 16s linear infinite;transform-origin:210px 148px}
+.drum-hint{animation:spin 26s linear infinite;transform-origin:210px 148px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:920px){
   .hero-grid{grid-template-columns:1fr;gap:2rem}
@@ -106,7 +106,6 @@ ul{list-style:none}
 .section-head .eyebrow{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
 .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin-bottom:.9rem}
 .section-head p{color:var(--muted)}
-/* glass card base */
 /* glass card base */
 .glass{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow)}
 /* ---------- steps ---------- */
@@ -133,15 +132,25 @@ ul{list-style:none}
   @keyframes flowV{from{background-position:0 150%}to{background-position:0 -50%}}
 }
 /* ---------- anatomy ---------- */
-.anatomy-wrap{padding:2.6rem 2.2rem}
+.anatomy-wrap{padding:2.8rem 2rem}
 .anatomy-svg{width:100%;height:auto}
 .anatomy-svg text{font-family:'Inter',system-ui,sans-serif}
-.drum-spin{animation:anatomySpin 14s linear infinite;transform-origin:380px 368px}
+.drum-spin{animation:anatomySpin 18s linear infinite;transform-origin:380px 300px}
 @keyframes anatomySpin{to{transform:rotate(360deg)}}
-.legend{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.anat-sensor{animation:sensorPulse 3s ease-in-out infinite}
+.anat-ping{transform-origin:380px 300px;animation:anatPing 3s ease-out infinite}
+@keyframes anatPing{0%,70%{transform:scale(.35);opacity:0}78%{opacity:.5}100%{transform:scale(1.02);opacity:0}}
+.trash{transform-origin:380px 300px;animation:trashDrop 3s cubic-bezier(.55,0,.85,.4) infinite}
+@keyframes trashDrop{
+  0%{transform:translateY(-158px) rotate(-9deg) scale(1.14);opacity:0}
+  12%{opacity:1}
+  68%{opacity:1}
+  100%{transform:translateY(6px) rotate(4deg) scale(.52);opacity:0}
+}
+.legend{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
 .legend li{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--muted);font-weight:600}
 .legend .swatch{width:14px;height:14px;border-radius:4px;flex:none}
-@media(max-width:640px){.anatomy-wrap{padding:1.4rem .6rem}}
+@media(max-width:640px){.anatomy-wrap{padding:1.6rem .5rem}}
 /* ---------- features ---------- */
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
 .feature{padding:1.9rem 1.6rem;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
@@ -379,61 +388,104 @@ ul{list-style:none}
       <p>One compact cylinder, three compartments. Simple, reliable mechanics doing the heavy lifting — designed in Härryda, Sweden.</p>
     </div>
     <div class="glass anatomy-wrap reveal" style="--d:.1s">
-      <svg class="anatomy-svg" viewBox="0 0 760 560" role="img" aria-label="Cutaway diagram of the TTT rotating bin showing sensor, motor and gear, rotating compartments, and slot hatch">
-        <!-- cylinder -->
-        <ellipse cx="380" cy="460" rx="118" ry="28" fill="#0D1526" stroke="rgba(148,163,184,.35)"/>
-        <rect x="262" y="110" width="236" height="350" fill="#111A2E" stroke="rgba(148,163,184,.35)"/>
-        <rect x="274" y="118" width="10" height="336" fill="rgba(255,255,255,.035)"/>
-        <ellipse cx="380" cy="110" rx="118" ry="28" fill="#16233C" stroke="rgba(148,163,184,.4)"/>
-        <!-- sensor on top -->
-        <ellipse cx="380" cy="92" rx="50" ry="13" fill="#0D1526" stroke="rgba(45,212,191,.55)"/>
-        <ellipse cx="380" cy="78" rx="27" ry="13" fill="#10B981"/>
-        <ellipse cx="380" cy="74" rx="15" ry="6.5" fill="#6EE7B7" opacity=".9"/>
-        <!-- motor block -->
-        <rect x="468" y="196" width="28" height="46" rx="6" fill="#1E293B" stroke="rgba(148,163,184,.45)"/>
-        <line x1="468" y1="219" x2="452" y2="219" stroke="rgba(148,163,184,.5)" stroke-width="3"/>
-        <!-- gear -->
-        <g stroke="#94A3B8" fill="#28354A">
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(0 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(45 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(90 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(135 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(180 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(225 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(270 445 216)"/>
-          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(315 445 216)"/>
-        </g>
-        <circle cx="445" cy="216" r="16" fill="#28354A" stroke="#94A3B8"/>
-        <circle cx="445" cy="216" r="5" fill="#0B1120" stroke="#94A3B8"/>
-                <!-- cutaway window -->
-        <rect x="298" y="252" width="164" height="196" rx="18" fill="#0B1120" stroke="rgba(148,163,184,.35)" stroke-dasharray="5 6"/>
-        <!-- rotating drum (3 sectors) -->
+      <svg class="anatomy-svg" viewBox="0 0 760 560" role="img" aria-label="Top-down cutaway of the TTT rotating bin: an AI sensor above the opening, a motor and gear turning a three-compartment drum, and a slot hatch. A bottle is shown dropping in.">
+        <defs>
+          <radialGradient id="anatBed" cx="50%" cy="46%" r="60%">
+            <stop offset="0" stop-color="#132038"/><stop offset="1" stop-color="#0A1020"/>
+          </radialGradient>
+          <radialGradient id="anatSheen" cx="42%" cy="32%" r="62%">
+            <stop offset="0" stop-color="rgba(255,255,255,.11)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/>
+          </radialGradient>
+          <linearGradient id="anatTrash" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#60A5FA"/><stop offset=".5" stop-color="#3B82F6"/><stop offset="1" stop-color="#2563EB"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ambient bed -->
+        <ellipse cx="380" cy="300" rx="238" ry="230" fill="url(#anatBed)"/>
+        <circle cx="380" cy="300" r="193" fill="none" stroke="rgba(45,212,191,.10)" stroke-width="1"/>
+
+        <!-- bin wall (rim) -->
+        <circle cx="380" cy="300" r="175" fill="#0D1526" stroke="rgba(148,163,184,.42)" stroke-width="1.5"/>
+        <circle cx="380" cy="300" r="156" fill="#0A1120" stroke="rgba(148,163,184,.22)" stroke-width="1"/>
+
+        <!-- rotating drum: three compartments -->
         <g class="drum-spin">
-          <path d="M380 368 L380 298 A70 70 0 0 1 440.6 403 Z" fill="#3B82F6" opacity=".85" stroke="#0B1120"/>
-          <path d="M380 368 L440.6 403 A70 70 0 0 1 319.4 403 Z" fill="#10B981" opacity=".85" stroke="#0B1120"/>
-          <path d="M380 368 L319.4 403 A70 70 0 0 1 380 298 Z" fill="#FACC15" opacity=".85" stroke="#0B1120"/>
-          <circle cx="380" cy="368" r="14" fill="#1E293B" stroke="#94A3B8"/>
-          <circle cx="380" cy="368" r="4" fill="#94A3B8"/>
+          <path d="M380 300 L380 152 A148 148 0 0 1 508 374 Z" fill="#3B82F6" opacity=".9"/>
+          <path d="M380 300 L508 374 A148 148 0 0 1 252 374 Z" fill="#10B981" opacity=".9"/>
+          <path d="M380 300 L252 374 A148 148 0 0 1 380 152 Z" fill="#FACC15" opacity=".82"/>
+          <line x1="380" y1="300" x2="380" y2="152" stroke="#0A1120" stroke-width="4"/>
+          <line x1="380" y1="300" x2="508" y2="374" stroke="#0A1120" stroke-width="4"/>
+          <line x1="380" y1="300" x2="252" y2="374" stroke="#0A1120" stroke-width="4"/>
+          <g font-size="11" font-weight="800" letter-spacing="1.2" text-anchor="middle">
+            <circle cx="466" cy="233" r="3" fill="#fff" opacity=".85"/>
+            <text x="466" y="254" fill="#EAF2FF">PLASTIC</text>
+            <circle cx="380" cy="396" r="3" fill="#04211A" opacity=".7"/>
+            <text x="380" y="417" fill="#04211A">METAL</text>
+            <circle cx="294" cy="233" r="3" fill="#0A1120" opacity=".55"/>
+            <text x="294" y="254" fill="#1E293B">PAPER</text>
+          </g>
         </g>
-        <path d="M299 322 A84 84 0 0 1 330 285" fill="none" stroke="rgba(148,163,184,.5)" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M330 285 l-9 1.5 M330 285 l-2.5 8.5" stroke="rgba(148,163,184,.5)" stroke-width="1.6" stroke-linecap="round"/>
-        <!-- hatch (open flap) -->
-        <path d="M298 254 L330 268 L330 294 L298 282 Z" fill="rgba(245,158,11,.16)" stroke="#F59E0B" stroke-width="1.8" stroke-linejoin="round"/>
-        <path d="M330 268 L342 273 M330 294 L342 289" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>
-        <!-- callouts: right -->
-        <line x1="571" y1="116" x2="434" y2="90" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
-        <circle cx="430" cy="89" r="3.5" fill="#2DD4BF"/>
-        <text x="575" y="121" font-size="15" font-weight="600" fill="#E2E8F0">Sensor läser av materialet</text>
-        <line x1="571" y1="232" x2="472" y2="218" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
-        <circle cx="468" cy="217" r="3.5" fill="#2DD4BF"/>
-        <text x="575" y="237" font-size="15" font-weight="600" fill="#E2E8F0">Motor och kuggjul</text>
-        <line x1="571" y1="366" x2="454" y2="368" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
-        <circle cx="450" cy="368" r="3.5" fill="#2DD4BF"/>
-        <text x="575" y="371" font-size="15" font-weight="600" fill="#E2E8F0">Roterande fack</text>
-        <!-- callout: left -->
-        <line x1="189" y1="250" x2="300" y2="262" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
-        <circle cx="302" cy="263" r="3.5" fill="#2DD4BF"/>
-        <text x="185" y="245" font-size="15" font-weight="600" fill="#E2E8F0" text-anchor="end">Lucka öppnas vid rätt fack</text>
+        <!-- glass sheen -->
+        <circle cx="380" cy="300" r="156" fill="url(#anatSheen)"/>
+
+        <!-- center hub + gear -->
+        <g fill="#28354A" stroke="#94A3B8" stroke-width="1">
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(0 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(45 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(90 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(135 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(180 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(225 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(270 380 300)"/>
+          <rect x="376" y="252" width="8" height="18" rx="2" transform="rotate(315 380 300)"/>
+        </g>
+        <circle cx="380" cy="300" r="34" fill="#1E293B" stroke="#94A3B8"/>
+        <circle cx="380" cy="300" r="22" fill="#0B1120" stroke="rgba(148,163,184,.5)"/>
+        <circle cx="380" cy="300" r="6" fill="#2DD4BF"/>
+
+        <!-- AI sensor above the opening -->
+        <g class="anat-sensor">
+          <ellipse cx="380" cy="126" rx="34" ry="12" fill="none" stroke="#10B981" stroke-width="2"/>
+          <ellipse cx="380" cy="126" rx="20" ry="7.5" fill="#10B981"/>
+          <ellipse cx="380" cy="124.5" rx="11" ry="4" fill="#A7F3D0" opacity=".9"/>
+        </g>
+        <line x1="380" y1="140" x2="380" y2="150" stroke="rgba(45,212,191,.55)" stroke-width="1.5" stroke-dasharray="2 4"/>
+
+        <!-- impact ripple -->
+        <circle class="anat-ping" cx="380" cy="300" r="82" fill="none" stroke="#2DD4BF" stroke-width="2"/>
+
+        <!-- trash dropping into the bin -->
+        <g class="trash">
+          <rect x="372" y="242" width="16" height="12" rx="3" fill="#1D4ED8"/>
+          <rect x="376" y="252" width="8" height="10" fill="#93C5FD"/>
+          <rect x="365" y="260" width="30" height="76" rx="13" fill="url(#anatTrash)"/>
+          <rect x="371" y="268" width="8" height="58" rx="4" fill="#fff" opacity=".28"/>
+          <rect x="365" y="294" width="30" height="24" fill="#0B1120" opacity=".35"/>
+        </g>
+
+        <!-- slot hatch (open flap, lower-left rim) -->
+        <path d="M298 441 A163 163 0 0 1 227 356" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+        <path d="M289 430 A150 150 0 0 1 239 366" fill="none" stroke="rgba(245,158,11,.5)" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- callouts -->
+        <g font-family="Inter, system-ui, sans-serif">
+          <line x1="152" y1="177" x2="357" y2="132" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="359" cy="131" r="3.5" fill="#2DD4BF"/>
+          <text x="150" y="181" text-anchor="end" font-size="15" font-weight="600" fill="#E2E8F0">AI sensor classifies the waste</text>
+
+          <line x1="152" y1="452" x2="254" y2="406" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="256" cy="404" r="3.5" fill="#2DD4BF"/>
+          <text x="150" y="456" text-anchor="end" font-size="15" font-weight="600" fill="#E2E8F0">Slot hatch opens on cue</text>
+
+          <line x1="608" y1="297" x2="412" y2="300" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="410" cy="300" r="3.5" fill="#2DD4BF"/>
+          <text x="610" y="304" font-size="15" font-weight="600" fill="#E2E8F0">Motor + gear rotate the drum</text>
+
+          <line x1="608" y1="357" x2="505" y2="302" stroke="rgba(45,212,191,.45)" stroke-width="1"/>
+          <circle cx="503" cy="301" r="3.5" fill="#2DD4BF"/>
+          <text x="610" y="361" font-size="15" font-weight="600" fill="#E2E8F0">Three rotating compartments</text>
+        </g>
       </svg>
       <ul class="legend" aria-label="Compartment color code">
         <li><span class="swatch" style="background:#3B82F6"></span>Blue — Plastic</li>
