@@ -1,817 +1,634 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TTT – Trash to Treasure · AI Smart Waste-Sorting Lid by HSI</title>
-<meta name="description" content="TTT is HSI's AI-powered smart lid that sorts your waste automatically — no app, no menus, just clear signals. Pre-order today." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TTT – Trash to Treasure · AI-Powered Smart Waste Sorting by HSI</title>
+<meta name="description" content="TTT is a compact smart rotating waste bin. An AI sensor reads your waste, a motor rotates the drum to the right compartment, and a hatch drops it in — no app, no menus, just clear signals."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0F172A;
-  --card:rgba(30,41,59,.6);
-  --charcoal:#1E293B;
-  --emerald:#10B981;
-  --teal:#2DD4BF;
-  --gold:#F59E0B;
-  --text:#E2E8F0;
-  --muted:#94A3B8;
-  --radius:1.25rem;
-  --grad:linear-gradient(90deg,#34D399,#2DD4BF);
+  --bg:#0B1120; --bg2:#0F172A; --panel:rgba(15,23,42,.55);
+  --line:rgba(148,163,184,.16); --line-strong:rgba(148,163,184,.3);
+  --text:#E2E8F0; --muted:#94A3B8; --dim:#64748B;
+  --em:#10B981; --teal:#2DD4BF; --gold:#F59E0B; --char:#1E293B;
+  --blue:#3B82F6; --yellow:#FACC15;
+  --grad:linear-gradient(135deg,#10B981 0%,#2DD4BF 100%);
+  --shadow:0 20px 50px -20px rgba(2,6,23,.7);
+  --radius:18px;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.65;overflow-x:hidden}
-svg,img{display:block;max-width:100%}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.7;
+  color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(900px 500px at 85% -5%,rgba(16,185,129,.09),transparent 60%),
+    radial-gradient(700px 500px at -10% 30%,rgba(45,212,191,.06),transparent 60%),
+    radial-gradient(800px 600px at 60% 110%,rgba(245,158,11,.05),transparent 60%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{line-height:1.12;letter-spacing:-.03em;font-weight:800}
+img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-ul,ol{list-style:none}
-section{scroll-margin-top:96px}
-.container{width:min(1120px,92%);margin-inline:auto}
-.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:.98rem;border-radius:999px;padding:.9rem 1.8rem;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,color .25s ease}
-.btn-primary{background:linear-gradient(90deg,#10B981,#2DD4BF);color:#04211a;box-shadow:0 4px 20px rgba(16,185,129,.35)}
-.btn-primary:hover,.btn-primary:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 4px rgba(45,212,191,.18),0 8px 34px rgba(45,212,191,.55)}
-.btn-ghost{background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.3);color:var(--text)}
-.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
-.btn-white{background:#fff;color:#065f46;box-shadow:0 6px 24px rgba(0,0,0,.25)}
-.btn-white:hover,.btn-white:focus-visible{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 34px rgba(0,0,0,.35)}
-:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
-
-.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;transition:background .35s ease,box-shadow .35s ease,padding .35s ease}
-.site-header.scrolled{background:rgba(15,23,42,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(0,0,0,.4);border-bottom:1px solid rgba(148,163,184,.14);padding:.6rem 0}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.brand{display:flex;align-items:center;gap:.75rem}
-.logo-badge{width:46px;height:46px;flex:none;filter:drop-shadow(0 0 10px rgba(16,185,129,.35))}
-.brand-text{display:flex;flex-direction:column;line-height:1.2}
-.brand-name{font-weight:900;font-size:1.15rem;letter-spacing:.06em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.brand-tag{font-size:.58rem;font-weight:600;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+ul{list-style:none}
+.container{max-width:1150px;margin:0 auto;padding:0 24px}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--em);color:#04211a;padding:.6rem 1rem;border-radius:0 0 10px 0;font-weight:700;z-index:200}
+.skip-link:focus{left:0}
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:700;font-size:.95rem;line-height:1;padding:.95rem 1.9rem;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;will-change:transform}
+.btn-primary{background:var(--grad);color:#04211a;box-shadow:0 8px 24px -8px rgba(16,185,129,.55)}
+.btn-primary:hover,.btn-primary:focus-visible{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(16,185,129,.7)}
+.btn-ghost{background:rgba(148,163,184,.06);color:var(--text);border-color:var(--line-strong)}
+.btn-ghost:hover,.btn-ghost:focus-visible{transform:translateY(-2px);border-color:rgba(45,212,191,.5);background:rgba(45,212,191,.08)}
+.btn-white{background:#fff;color:#04211a;font-weight:800}
+.btn-white:hover,.btn-white:focus-visible{transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(2,6,23,.45)}
+/* ---------- navbar ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;padding:14px 0;transition:background .3s ease,border-color .3s ease,box-shadow .3s ease,padding .3s ease;border-bottom:1px solid transparent}
+.nav.scrolled{padding:9px 0;background:rgba(11,17,32,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line);box-shadow:0 10px 30px -18px rgba(2,6,23,.8)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;min-width:0}
+.brand-badge{width:42px;height:42px;flex:none;filter:drop-shadow(0 4px 14px rgba(16,185,129,.35))}
+.brand-name{font-weight:900;font-size:1.06rem;letter-spacing:-.02em;white-space:nowrap}
+.brand-tag{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:1.7rem}
-.nav-links a{font-size:.92rem;font-weight:600;color:var(--muted);transition:color .2s ease}
-.nav-links a:hover,.nav-links a:focus-visible{color:var(--teal)}
-.nav-cta{padding:.65rem 1.4rem;font-size:.9rem}
-.nav-toggle{display:none;background:none;border:1px solid rgba(148,163,184,.3);border-radius:.6rem;padding:.45rem .55rem;cursor:pointer;color:var(--text)}
-.nav-toggle svg{width:24px;height:24px}
-@media (max-width:820px){
+.nav-links a{font-size:.88rem;font-weight:600;color:var(--muted);transition:color .2s ease;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--grad);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{display:flex;align-items:center;gap:1rem}
+.nav-cta .btn{padding:.62rem 1.35rem;font-size:.85rem}
+.nav-toggle{display:none;background:none;border:1px solid var(--line-strong);border-radius:10px;padding:.5rem .55rem;cursor:pointer;color:var(--text)}
+.nav-toggle svg{width:20px;height:20px}
+@media(max-width:880px){
   .nav-toggle{display:inline-flex}
-  .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:rgba(15,23,42,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(148,163,184,.18);padding:.8rem 4%;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
-  .nav-links.open{max-height:420px;padding:1rem 4% 1.4rem}
-  .nav-links a{padding:.7rem .4rem;font-size:1rem;border-bottom:1px solid rgba(148,163,184,.1)}
-  .nav-links .nav-cta{margin-top:.9rem;justify-content:center;border:none}
-}
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:8.5rem 0 5rem}
-.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none}
-.hero::before{width:560px;height:560px;left:-160px;top:-120px;background:radial-gradient(circle,rgba(16,185,129,.35),transparent 65%);animation:drift 14s ease-in-out infinite alternate}
-.hero::after{width:620px;height:620px;right:-200px;bottom:-180px;background:radial-gradient(circle,rgba(45,212,191,.28),transparent 65%);animation:drift 18s ease-in-out infinite alternate-reverse}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(70px,50px) scale(1.12)}}
-.particle{position:absolute;bottom:-12px;border-radius:50%;background:rgba(45,212,191,.55);pointer-events:none;animation:rise linear infinite}
-@keyframes rise{0%{transform:translateY(0);opacity:0}12%{opacity:.9}100%{transform:translateY(-110vh);opacity:0}}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center;position:relative;z-index:1}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(45,212,191,.35);background:rgba(16,185,129,.08);padding:.45rem 1rem;border-radius:999px;margin-bottom:1.5rem}
-.hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 10px var(--emerald);animation:blink 2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:900;line-height:1.06;letter-spacing:-.02em;margin-bottom:1.4rem}
-.hero .lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--muted);max-width:34rem;margin-bottom:2.4rem}
-.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
-.hero-trust{display:flex;flex-wrap:wrap;gap:1.4rem;font-size:.85rem;color:var(--muted);font-weight:600}
-.hero-trust span{display:inline-flex;align-items:center;gap:.45rem}
-.hero-trust svg{width:17px;height:17px;color:var(--emerald);flex:none}
-.hero-art{display:grid;place-items:center}
-.lid-stage{width:min(480px,100%);animation:floaty 6.5s ease-in-out infinite;filter:drop-shadow(0 30px 50px rgba(0,0,0,.5))}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-.led-glow{animation:ledPulse 2.2s ease-in-out infinite}
-.led-glow.d2{animation-delay:.5s}
-.led-glow.d3{animation-delay:1s}
-@keyframes ledPulse{0%,100%{opacity:1}50%{opacity:.3}}
-.scan-ring{transform-origin:210px 185px;animation:spin 14s linear infinite}
+  .brand-tag{display:none}
+  .nav-cta .btn{display:none}
+  .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;background:rgba(11,17,32,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:8px 24px 18px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+  .nav.nav-open .nav-links{max-height:420px}
+  .nav-links a{padding:.85rem 0;width:100%;font-size:1rem}
+}/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;align-items:center;position:relative;padding:130px 0 70px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(640px 420px at 72% 42%,rgba(16,185,129,.12),transparent 65%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:.55rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(45,212,191,.3);background:rgba(45,212,191,.07);border-radius:999px;padding:.45rem 1.05rem;margin-bottom:1.4rem}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--em);box-shadow:0 0 0 4px rgba(16,185,129,.18);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(16,185,129,.18)}50%{box-shadow:0 0 0 7px rgba(16,185,129,.06)}}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:900;margin-bottom:1.2rem}
+.hero-sub{color:var(--muted);font-size:1.08rem;max-width:34rem;margin-bottom:2.1rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:1rem}
+.hero-stats{display:flex;flex-wrap:wrap;gap:1.8rem;margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.hero-stats div strong{display:block;font-size:1.15rem;font-weight:800;letter-spacing:-.02em}
+.hero-stats div span{font-size:.78rem;color:var(--muted)}
+/* bin scene */
+.bin-scene{position:relative;display:flex;justify-content:center;align-items:flex-end;padding:20px 0 10px}
+.bin-glow{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);width:70%;height:90px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,185,129,.35),transparent);filter:blur(18px);animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:.95}}
+.bin-float{position:relative;width:min(420px,86%);animation:float 6.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.bin-svg{width:100%;height:auto}
+.sensor-ring{animation:sensorPulse 3s ease-in-out infinite}
+@keyframes sensorPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.drum-hint{animation:spin 16s linear infinite;transform-origin:210px 148px}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:2.8rem}
-  .hero{padding-top:7.5rem;text-align:center}
-  .hero .lead{margin-inline:auto}
-  .hero-actions,.hero-trust{justify-content:center}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:2rem}
+  .hero{padding-top:118px}
+  .hero-sub{max-width:100%}
 }
-
-.section{padding:6.5rem 0;position:relative}
-.section-head{text-align:center;max-width:680px;margin:0 auto 3.6rem}
-.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
-.section-head h2{font-size:clamp(1.85rem,3.6vw,2.7rem);font-weight:900;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
-.section-head p{color:var(--muted);font-size:1.02rem}
-/* ---------- Features ---------- */
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
-.card{background:var(--card);border:1px solid rgba(148,163,184,.16);border-radius:var(--radius);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:2.1rem;box-shadow:0 14px 34px rgba(0,0,0,.28);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
-.card:hover{transform:translateY(-7px);border-color:rgba(45,212,191,.55);box-shadow:0 20px 46px rgba(16,185,129,.16)}
-.feature-icon{width:54px;height:54px;border-radius:1rem;display:grid;place-items:center;background:linear-gradient(135deg,rgba(16,185,129,.28),rgba(45,212,191,.1));border:1px solid rgba(45,212,191,.35);color:var(--teal);margin-bottom:1.25rem}
+/* ---------- sections shared ---------- */
+.section{padding:104px 0}
+.section-head{max-width:640px;margin:0 auto 3.4rem;text-align:center}
+.section-head .eyebrow{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
+.section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin-bottom:.9rem}
+.section-head p{color:var(--muted)}
+/* glass card base */
+/* glass card base */
+.glass{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+/* ---------- steps ---------- */
+.steps{display:flex;align-items:stretch;gap:0;justify-content:center}
+.step{flex:1;max-width:330px;padding:2.2rem 1.8rem;text-align:center;position:relative;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.step:hover{transform:translateY(-5px);border-color:rgba(45,212,191,.35);box-shadow:0 26px 60px -24px rgba(2,6,23,.85),0 0 0 1px rgba(45,212,191,.12)}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--grad);color:#04211a;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;box-shadow:0 8px 20px -6px rgba(16,185,129,.5)}
+.step-icon{width:58px;height:58px;margin:0 auto 1.1rem;display:flex;align-items:center;justify-content:center;border-radius:16px;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.22);color:var(--teal)}
+.step-icon svg{width:30px;height:30px}
+.step h3{font-size:1.22rem;margin-bottom:.6rem}
+.step p{font-size:.92rem;color:var(--muted)}
+.connector{flex:0 0 84px;position:relative;top:50%;height:2px;margin-top:-1px;
+  background:linear-gradient(90deg,transparent,rgba(45,212,191,.55) 20%,rgba(45,212,191,.55) 80%,transparent);
+  background-size:200% 100%;animation:flow 2.6s linear infinite}
+.connector::after{content:"";position:absolute;right:-2px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left:9px solid rgba(45,212,191,.8)}
+@keyframes flow{from{background-position:150% 0}to{background-position:-50% 0}}
+@media(max-width:880px){
+  .steps{flex-direction:column;align-items:center;gap:1.4rem}
+  .step{max-width:440px;width:100%}
+  .connector{flex:none;width:2px;height:52px;top:auto;margin-top:0;
+    background:linear-gradient(180deg,transparent,rgba(45,212,191,.55) 20%,rgba(45,212,191,.55) 80%,transparent);
+    background-size:100% 200%;animation:flowV 2.6s linear infinite}
+  .connector::after{right:auto;top:auto;bottom:-2px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top:9px solid rgba(45,212,191,.8)}
+  @keyframes flowV{from{background-position:0 150%}to{background-position:0 -50%}}
+}
+/* ---------- anatomy ---------- */
+.anatomy-wrap{padding:2.6rem 2.2rem}
+.anatomy-svg{width:100%;height:auto}
+.anatomy-svg text{font-family:'Inter',system-ui,sans-serif}
+.drum-spin{animation:anatomySpin 14s linear infinite;transform-origin:380px 368px}
+@keyframes anatomySpin{to{transform:rotate(360deg)}}
+.legend{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:center;margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+.legend li{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--muted);font-weight:600}
+.legend .swatch{width:14px;height:14px;border-radius:4px;flex:none}
+@media(max-width:640px){.anatomy-wrap{padding:1.4rem .6rem}}
+/* ---------- features ---------- */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.feature{padding:1.9rem 1.6rem;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.feature:hover{transform:translateY(-5px);border-color:rgba(16,185,129,.4);box-shadow:0 26px 60px -24px rgba(2,6,23,.85),0 0 30px -10px rgba(16,185,129,.18)}
+.feature-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--grad);color:#04211a;margin-bottom:1.1rem;box-shadow:0 10px 24px -8px rgba(16,185,129,.5)}
 .feature-icon svg{width:26px;height:26px}
-.card h3{font-size:1.12rem;font-weight:800;margin-bottom:.55rem}
-.card p{color:var(--muted);font-size:.95rem}
-.card .tag{display:inline-block;margin-top:.9rem;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
-
-/* ---------- How it works ---------- */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative}
-.step{position:relative;text-align:center;padding:2.2rem 1.6rem}
-.step-num{width:58px;height:58px;margin:0 auto 1.3rem;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1.35rem;color:#04211a;background:linear-gradient(135deg,#34D399,#2DD4BF);box-shadow:0 0 0 6px rgba(16,185,129,.14),0 0 26px rgba(16,185,129,.4)}
-.step h3{font-size:1.1rem;font-weight:800;margin-bottom:.5rem}
-.step p{color:var(--muted);font-size:.94rem}
-.connector{position:absolute;top:calc(2.2rem + 29px);height:3px;width:calc(100% - 220px);max-width:150px;left:50%;margin-left:90px;background:repeating-linear-gradient(90deg,rgba(45,212,191,.85) 0 10px,transparent 10px 20px);animation:flow 1s linear infinite;border-radius:2px;opacity:.8}
-.step:last-child .connector{display:none}
-@keyframes flow{to{background-position:20px 0}}
-@media (max-width:860px){
-  .steps{grid-template-columns:1fr;max-width:480px;margin-inline:auto}
-  .connector{display:none}
-  .step::before{content:"";position:absolute;left:50%;top:calc(2.2rem + 58px);bottom:1rem;width:3px;background:repeating-linear-gradient(180deg,rgba(45,212,191,.85) 0 10px,transparent 10px 20px);animation:flowV 1s linear infinite}
-  .step:last-child::before{display:none}
-  @keyframes flowV{to{background-position:0 20px}}
-}
-/* ---------- Spec / delivery ---------- */
-.spec-card{max-width:780px;margin-inline:auto;background:var(--charcoal);border:1px solid rgba(148,163,184,.18);border-left:5px solid var(--emerald);border-radius:var(--radius);padding:2.6rem;box-shadow:0 18px 44px rgba(0,0,0,.4);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.spec-card h3{font-size:1.3rem;font-weight:900;margin-bottom:1.6rem}
-.spec-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem 2.2rem}
-.spec-item{display:flex;align-items:flex-start;gap:.8rem;font-size:.96rem}
-.spec-item svg{width:21px;height:21px;flex:none;color:var(--emerald);margin-top:.15rem}
-.spec-item strong{font-weight:700;display:block}
-.spec-item span{color:var(--muted);font-size:.88rem}
-@media (max-width:680px){.spec-list{grid-template-columns:1fr}}
-
-/* ---------- Social proof ---------- */
-.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:920px;margin-inline:auto}
-.quote{position:relative;padding:2.2rem}
-.quote::before{content:"\201C";position:absolute;top:.4rem;right:1.4rem;font-size:4.2rem;font-weight:900;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9}
-.quote p{font-size:1.06rem;font-weight:600;margin-bottom:1.2rem}
+.feature h3{font-size:1.05rem;margin-bottom:.45rem}
+.feature p{font-size:.9rem;color:var(--muted)}
+@media(max-width:920px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.features-grid{grid-template-columns:1fr}}
+/* ---------- specs ---------- */
+.specs-card{padding:2.6rem 2.4rem;border-left:4px solid var(--em)}
+.specs-list{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 2.4rem}
+.specs-list li{display:flex;gap:.8rem;align-items:flex-start;padding:.85rem 1rem;border:1px solid var(--line);border-radius:12px;background:rgba(11,17,32,.45)}
+.specs-list svg{width:20px;height:20px;flex:none;color:var(--em);margin-top:.2rem}
+.specs-list strong{display:block;font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}
+.specs-list span{font-size:.95rem;font-weight:600}
+@media(max-width:680px){.specs-list{grid-template-columns:1fr}.specs-card{padding:2rem 1.4rem}}
+/* ---------- quotes ---------- */
+.quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.quote{padding:2.1rem 1.9rem;position:relative}
+.quote::before{content:"\201C";position:absolute;top:.6rem;right:1.4rem;font-size:4.2rem;font-weight:900;line-height:1;color:rgba(45,212,191,.18);pointer-events:none}
+.quote p{font-size:1.06rem;font-weight:600;line-height:1.6;margin-bottom:1.2rem}
 .quote footer{display:flex;align-items:center;gap:.8rem}
-.avatar{width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:900;color:#04211a;background:linear-gradient(135deg,#34D399,#F59E0B)}
-.quote footer strong{display:block;font-size:.92rem}
-.quote footer em{font-style:normal;font-size:.8rem;color:var(--muted)}
-
+.quote .avatar{width:40px;height:40px;border-radius:50%;background:var(--grad);color:#04211a;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.quote footer strong{display:block;font-size:.9rem}
+.quote footer span{font-size:.8rem;color:var(--muted)}
+@media(max-width:760px){.quotes-grid{grid-template-columns:1fr}}
 /* ---------- CTA banner ---------- */
-.cta-banner{position:relative;overflow:hidden;background:linear-gradient(100deg,#059669,#10B981 45%,#2DD4BF);border-radius:var(--radius);padding:4rem 2rem;text-align:center;box-shadow:0 24px 60px rgba(16,185,129,.3)}
-.cta-banner::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.28),transparent 40%),radial-gradient(circle at 75% 70%,rgba(255,255,255,.2),transparent 45%);pointer-events:none}
-.cta-banner h2{position:relative;font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:900;color:#04211a;letter-spacing:-.02em;margin-bottom:1.8rem}
+.cta-banner{position:relative;overflow:hidden;background:var(--grad);border-radius:24px;padding:4rem 2.5rem;text-align:center}
+.cta-banner::before{content:"";position:absolute;inset:0;background:radial-gradient(500px 260px at 80% 0%,rgba(255,255,255,.22),transparent 60%),radial-gradient(420px 260px at 10% 110%,rgba(4,33,26,.3),transparent 60%)}
+.cta-banner h2{position:relative;font-size:clamp(1.8rem,3.8vw,2.7rem);color:#04211a;margin-bottom:.7rem}
+.cta-banner p{position:relative;color:rgba(4,33,26,.8);font-weight:600;margin-bottom:1.9rem}
 .cta-banner .btn{position:relative}
-
-/* ---------- Footer ---------- */
-.site-footer{border-top:1px solid rgba(148,163,184,.14);padding:3rem 0 2.2rem;margin-top:2rem}
-.footer-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.4rem}
+@media(max-width:640px){.cta-banner{padding:3rem 1.4rem;border-radius:18px}}
+/* ---------- footer ---------- */
+.footer{border-top:1px solid var(--line);padding:2.6rem 0;margin-top:4rem}
+.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.4rem}
 .footer-brand{display:flex;align-items:center;gap:.8rem}
-.footer-brand .logo-badge{width:40px;height:40px}
-.footer-brand p{font-size:.86rem;color:var(--muted);max-width:24rem}
-.footer-links{display:flex;gap:1.6rem;font-size:.9rem;font-weight:600}
-.footer-links a{color:var(--muted);transition:color .2s}
+.footer-brand .brand-badge{width:34px;height:34px}
+.footer-brand p{font-size:.85rem;color:var(--muted)}
+.footer-links{display:flex;gap:1.6rem}
+.footer-links a{font-size:.88rem;font-weight:600;color:var(--muted);transition:color .2s ease}
 .footer-links a:hover,.footer-links a:focus-visible{color:var(--teal)}
-
-/* ---------- Demo modal ---------- */
-.modal{position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:1.2rem}
-.modal.open{display:grid}
-.modal-backdrop{position:absolute;inset:0;background:rgba(2,6,23,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.modal-panel{position:relative;width:min(560px,100%);background:var(--charcoal);border:1px solid rgba(45,212,191,.35);border-radius:var(--radius);padding:2.6rem;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.6)}
-.modal-panel .logo-badge{width:84px;height:84px;margin:0 auto 1.4rem}
-.modal-panel h3{font-size:1.4rem;font-weight:900;margin-bottom:.7rem}
-.modal-panel p{color:var(--muted);font-size:.96rem;margin-bottom:1.8rem}
-.modal-close{position:absolute;top:.9rem;right:.9rem;background:rgba(148,163,184,.12);border:1px solid rgba(148,163,184,.25);color:var(--text);width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:1.1rem;line-height:1}
-.modal-close:hover{border-color:var(--teal);color:var(--teal)}
-
-/* ---------- Scroll reveal ---------- */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1);transition-delay:var(--d,0s)}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none;transition:none}
-  .lid-stage,.particle,.scan-ring,.led-glow,.connector,.step::before,.hero::before,.hero::after{animation:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
 }
-.lang-switch{display:inline-flex;align-items:center;gap:.15rem;background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.3);border-radius:999px;padding:.22rem;flex:none}
-.lang-switch button{background:none;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.05em;color:var(--muted);padding:.38rem .8rem;border-radius:999px;transition:color .2s ease,background .2s ease,box-shadow .2s ease}
-.lang-switch button:hover,.lang-switch button:focus-visible{color:var(--text)}
-.lang-switch button.active{background:linear-gradient(90deg,#10B981,#2DD4BF);color:#04211a;box-shadow:0 2px 12px rgba(45,212,191,.4)}
 </style>
 </head>
-<body>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ============ SHARED SVG DEFS (logo badge) ============ -->
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <defs>
-    <linearGradient id="lg-ring" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#10B981"/>
-      <stop offset="1" stop-color="#2DD4BF"/>
-    </linearGradient>
-    <linearGradient id="lg-leaf" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#34D399"/>
-      <stop offset="1" stop-color="#10B981"/>
-    </linearGradient>
-    <symbol id="logo-badge" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="56" fill="#1E293B"/>
-      <circle cx="60" cy="60" r="56" fill="none" stroke="url(#lg-ring)" stroke-width="4"/>
-      <circle cx="60" cy="60" r="45" fill="none" stroke="rgba(148,163,184,.28)" stroke-width="1"/>
-      <!-- recycling arcs -->
-      <g fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" opacity=".9">
-        <path d="M31 68 a 30 30 0 0 1 8 -20"/>
-        <path d="M89 52 a 30 30 0 0 1 -3 21"/>
-        <path d="M48 92 a 30 30 0 0 0 24 0"/>
-      </g>
-      <!-- leaf -->
-      <path d="M60 26 C 85 33, 93 57, 64 81 C 61.5 83, 58 83, 56 81 C 47 61, 48 41, 60 26 Z" fill="url(#lg-leaf)"/>
-      <path d="M59 33 C 57 49, 57 63, 60 76" stroke="#0F172A" stroke-width="2" fill="none" opacity=".55"/>
-      <path d="M59 45 L 70 39 M59 57 L 72 51" stroke="#0F172A" stroke-width="1.7" fill="none" opacity=".5"/>
-      <!-- circuit traces + nodes -->
-      <g stroke="#2DD4BF" stroke-width="1.6" fill="none" opacity=".95">
-        <path d="M60 81 L 60 97"/>
-        <path d="M52 78 L 38 90"/>
-        <path d="M68 78 L 82 90"/>
-      </g>
-      <g fill="#F59E0B">
-        <circle cx="60" cy="100" r="2.8"/>
-        <circle cx="35" cy="92" r="2.5"/>
-        <circle cx="85" cy="92" r="2.5"/>
-      </g>
-      <g fill="#2DD4BF" opacity=".9">
-        <circle cx="60" cy="97" r="1.6"/>
-        <circle cx="38" cy="90" r="1.4"/>
-        <circle cx="82" cy="90" r="1.4"/>
-      </g>
-    </symbol>
-    <symbol id="icon-check" viewBox="0 0 24 24">
-      <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-  </defs>
-</svg>
-
-<!-- ============ NAVBAR ============ -->
-<header class="site-header" id="site-header">
-  <nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="#top" aria-label="TTT – Trash to Treasure, home">
-      <svg class="logo-badge" role="img" aria-label="TTT logo"><use href="#logo-badge"/></svg>
-      <span class="brand-text">
-        <span class="brand-name">TTT</span>
-        <span class="brand-tag" data-i18n="brand.tag">Trash to Treasure by HSI</span>
-      </span>
+<!-- ============ 1 · NAVBAR ============ -->
+<header class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="TTT — Trash to Treasure, home">
+      <svg class="brand-badge" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <circle cx="32" cy="32" r="29.5" fill="#0F172A" stroke="#10B981" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="23.5" fill="none" stroke="rgba(148,163,184,.3)" stroke-width="1" stroke-dasharray="2.5 5"/>
+        <path d="M19 28c0-10 7.5-15 17-15 0 10-6.5 15-17 15Z" fill="#10B981"/>
+        <path d="M21.5 26.5C26 20.5 31 16 33.5 14.5" stroke="#04211A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+        <path d="M39 23.5h7.5V31" stroke="#F59E0B" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+        <circle cx="48.5" cy="31" r="2.1" fill="#F59E0B"/>
+        <text x="32" y="47.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="15.5" font-weight="900" letter-spacing="1.5" fill="#E2E8F0">TTT</text>
+      </svg>
+      <span class="brand-name">TTT</span>
+      <span class="brand-tag">Trash to Treasure by HSI</span>
     </a>
-    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="lang-switch" role="group" aria-label="Språk / Language">
-      <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
-      <button type="button" data-lang="sv" aria-pressed="false">SV</button>
+    <nav class="nav-links" id="nav-menu" aria-label="Primary">
+      <a href="#overview">Overview</a>
+      <a href="#how">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#specs">Specs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="#preorder">Pre-Order</a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#overview" data-i18n="nav.overview">Overview</a></li>
-      <li><a href="#features" data-i18n="nav.features">Features</a></li>
-      <li><a href="#how" data-i18n="nav.how">How It Works</a></li>
-      <li><a href="#delivery" data-i18n="nav.delivery">Delivery</a></li>
-      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-      <li><a class="btn btn-primary nav-cta" href="#preorder" data-i18n="nav.preorder">Pre-Order</a></li>
-    </ul>
-  </nav>
+  </div>
 </header>
+<main id="main">
 
-<main id="top">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="overview" aria-labelledby="hero-title">
-    <div class="container hero-grid">
-      <div class="hero-copy reveal">
-        <span class="hero-eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.eyebrow">AI-Powered · Made by HSI, Sweden</span></span>
-        <h1 id="hero-title" data-i18n-html="hero.title">Sort Waste. Save the Planet. <span class="grad-text">Automatically.</span></h1>
-        <p class="lead" data-i18n="hero.lead">TTT is the AI-powered lid that tells you exactly where every piece of trash belongs — no app, no menus, just clear signals.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#preorder" data-i18n="hero.cta">Pre-Order Now</a>
-          <button class="btn btn-ghost" id="demo-btn" type="button">
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.5l5 3.5-5 3.5v-7z" fill="currentColor"/></svg>
-            <span data-i18n="hero.demo">Watch Demo</span>
-          </button>
-        </div>
-        <ul class="hero-trust" aria-label="Highlights">
-          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg><span data-i18n="hero.t1">Ships in 1 week</span></span></li>
-          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg><span data-i18n="hero.t2">2-year warranty</span></span></li>
-          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg><span data-i18n="hero.t3">20% recycled build</span></span></li>
-        </ul>
+<!-- ============ 2 · HERO ============ -->
+<section class="hero" id="overview">
+  <div class="container hero-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem">
+        <svg viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="TTT logo — Trash to Treasure by HSI" style="filter:drop-shadow(0 6px 20px rgba(16,185,129,.4))">
+          <circle cx="32" cy="32" r="29.5" fill="#0F172A" stroke="#10B981" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="23.5" fill="none" stroke="rgba(148,163,184,.3)" stroke-width="1" stroke-dasharray="2.5 5"/>
+          <path d="M19 28c0-10 7.5-15 17-15 0 10-6.5 15-17 15Z" fill="#10B981"/>
+          <path d="M21.5 26.5C26 20.5 31 16 33.5 14.5" stroke="#04211A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+          <path d="M39 23.5h7.5V31" stroke="#F59E0B" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+          <circle cx="48.5" cy="31" r="2.1" fill="#F59E0B"/>
+          <text x="32" y="47.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="15.5" font-weight="900" letter-spacing="1.5" fill="#E2E8F0">TTT</text>
+        </svg>
+        <p style="font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Trash to Treasure<br/><span style="color:var(--teal)">by HSI</span></p>
       </div>
+      <span class="kicker"><span class="dot" aria-hidden="true"></span>HSI · Auto Källsortering</span>
+      <h1>Sort waste. <span class="grad">Save the planet.</span> Automatically.</h1>
+      <p class="hero-sub">TTT is a smart rotating waste bin with an AI sensor that reads your waste, rotates to the right compartment, and drops it in — no app, no menus, just clear signals.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#preorder">
+          Pre-Order Now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="hero-stats" role="list">
+        <div role="listitem"><strong>3 smart compartments</strong><span>in one compact bin</span></div>
+        <div role="listitem"><strong>~15 s sort cycle</strong><span>scan → rotate → drop</span></div>
+        <div role="listitem"><strong>0 apps, 0 menus</strong><span>light + sound feedback</span></div>
+      </div>
+    </div>
+    <div class="bin-scene" aria-hidden="true">
+      <div class="bin-glow"></div>
+      <div class="bin-float">
+        <svg class="bin-svg" viewBox="0 0 420 560" role="img" aria-label="TTT rotating smart waste bin with AI sensor on top and three color-coded compartments">
+          <defs>
+            <linearGradient id="binBody" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#1E293B"/>
+              <stop offset=".45" stop-color="#28354A"/>
+              <stop offset="1" stop-color="#111A2E"/>
+            </linearGradient>
+            <linearGradient id="binTop" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1B2740"/>
+              <stop offset="1" stop-color="#0D1526"/>
+            </linearGradient>
+            <linearGradient id="slotBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60A5FA"/><stop offset="1" stop-color="#2563EB"/></linearGradient>
+            <linearGradient id="slotGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#059669"/></linearGradient>
+            <linearGradient id="slotYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDE68A"/><stop offset="1" stop-color="#D97706"/></linearGradient>
+          </defs>
+          <!-- base + body -->
+          <ellipse cx="210" cy="510" rx="100" ry="18" fill="#0D1526" stroke="rgba(148,163,184,.25)"/>
+          <rect x="110" y="140" width="200" height="370" rx="10" fill="url(#binBody)"/>
+          <rect x="124" y="150" width="14" height="350" rx="7" fill="rgba(255,255,255,.04)"/>
+          <rect x="284" y="150" width="10" height="350" rx="5" fill="rgba(2,6,23,.35)"/>
+          <!-- top cap -->
+          <ellipse cx="210" cy="140" rx="100" ry="26" fill="url(#binTop)" stroke="rgba(148,163,184,.3)"/>
+          <!-- rotating drum hint (slow orbiting dashes) -->
+          <circle class="drum-hint" cx="210" cy="148" r="74" fill="none" stroke="rgba(45,212,191,.4)" stroke-width="1.5" stroke-dasharray="3 11" stroke-linecap="round"/>
+          <!-- glowing AI sensor ring -->
+          <g class="sensor-ring">
+            <ellipse cx="210" cy="140" rx="60" ry="15" fill="none" stroke="#10B981" stroke-width="2.5"/>
+            <ellipse cx="210" cy="140" rx="44" ry="10.5" fill="none" stroke="rgba(45,212,191,.55)" stroke-width="1.5"/>
+            <ellipse cx="210" cy="140" rx="22" ry="5.5" fill="#10B981"/>
+            <ellipse cx="210" cy="138.5" rx="12" ry="3" fill="#A7F3D0" opacity=".85"/>
+          </g>
+          <!-- front compartment panel -->
+          <rect x="130" y="216" width="160" height="156" rx="18" fill="rgba(11,17,32,.65)" stroke="rgba(148,163,184,.22)"/>
+          <rect x="150" y="240" width="34" height="108" rx="10" fill="url(#slotBlue)"/>
+          <rect x="159" y="250" width="16" height="88" rx="7" fill="rgba(2,6,23,.5)"/>
+          <rect x="193" y="240" width="34" height="108" rx="10" fill="url(#slotGreen)"/>
+          <rect x="202" y="250" width="16" height="88" rx="7" fill="rgba(2,6,23,.5)"/>
+          <rect x="236" y="240" width="34" height="108" rx="10" fill="url(#slotYellow)"/>
+          <rect x="245" y="250" width="16" height="88" rx="7" fill="rgba(2,6,23,.5)"/>
+          <text x="167" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#93C5FD">PLASTIC</text>
+          <text x="210" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#6EE7B7">METAL</text>
+          <text x="253" y="368" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" fill="#FDE68A">PAPER</text>
+          <!-- lower branding -->
+          <line x1="150" y1="404" x2="270" y2="404" stroke="rgba(148,163,184,.2)" stroke-width="1"/>
+          <text x="210" y="432" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="900" letter-spacing="4" fill="#64748B">TTT</text>
+          <text x="210" y="450" text-anchor="middle" font-size="8.5" font-weight="600" letter-spacing="2.5" fill="#475569">ROTATING SMART BIN</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="hero-art reveal" style="--d:.15s">
-        <div class="lid-stage">
-          <svg viewBox="0 0 420 420" role="img" data-i18n-attr="aria-label" data-i18n-key="hero.artLabel" aria-label="TTT smart lid with a central AI sensor and green, orange and red indicator lights">
-            <defs>
-              <radialGradient id="lid-top" cx="38%" cy="30%" r="80%">
-                <stop offset="0" stop-color="#3B4A63"/>
-                <stop offset=".55" stop-color="#1E293B"/>
-                <stop offset="1" stop-color="#0B1220"/>
-              </radialGradient>
-              <linearGradient id="lid-rim" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#475569"/>
-                <stop offset=".5" stop-color="#1E293B"/>
-                <stop offset="1" stop-color="#334155"/>
-              </linearGradient>
-              <radialGradient id="lid-lens" cx="40%" cy="35%" r="75%">
-                <stop offset="0" stop-color="#155E75"/>
-                <stop offset=".55" stop-color="#0B1220"/>
-                <stop offset="1" stop-color="#020617"/>
-              </radialGradient>
-            </defs>
-            <!-- floor shadow -->
-            <ellipse cx="210" cy="386" rx="125" ry="16" fill="rgba(0,0,0,.5)"/>
-            <!-- lid rim + top -->
-            <circle cx="210" cy="195" r="166" fill="url(#lid-rim)"/>
-            <circle cx="210" cy="183" r="152" fill="url(#lid-top)"/>
-            <circle cx="210" cy="183" r="152" fill="none" stroke="rgba(148,163,184,.35)" stroke-width="1.5"/>
-            <!-- indicator lights on the rim -->
-            <g>
-              <circle class="led-glow" cx="128" cy="78" r="19" fill="rgba(52,211,153,.22)"/>
-              <circle cx="128" cy="78" r="10" fill="#34D399"/>
-              <circle cx="125" cy="75" r="3.4" fill="rgba(255,255,255,.8)"/>
-              <circle class="led-glow d2" cx="210" cy="47" r="19" fill="rgba(245,158,11,.22)"/>
-              <circle cx="210" cy="47" r="10" fill="#F59E0B"/>
-              <circle cx="207" cy="44" r="3.4" fill="rgba(255,255,255,.8)"/>
-              <circle class="led-glow d3" cx="292" cy="78" r="19" fill="rgba(248,113,113,.2)"/>
-              <circle cx="292" cy="78" r="10" fill="#F87171"/>
-              <circle cx="289" cy="75" r="3.4" fill="rgba(255,255,255,.8)"/>
-            </g>
-            <!-- scanning ring -->
-            <g class="scan-ring">
-              <circle cx="210" cy="183" r="106" fill="none" stroke="rgba(45,212,191,.5)" stroke-width="2" stroke-dasharray="10 14"/>
-            </g>
-            <circle cx="210" cy="183" r="118" fill="none" stroke="rgba(148,163,184,.2)" stroke-width="1"/>
-            <!-- AI sensor lens -->
-            <circle cx="210" cy="183" r="74" fill="#0B1220"/>
-            <circle cx="210" cy="183" r="74" fill="none" stroke="rgba(45,212,191,.55)" stroke-width="2"/>
-            <circle cx="210" cy="183" r="54" fill="url(#lid-lens)"/>
-            <circle cx="210" cy="183" r="54" fill="none" stroke="rgba(148,163,184,.35)" stroke-width="1"/>
-            <circle cx="193" cy="165" r="13" fill="rgba(255,255,255,.16)"/>
-            <circle cx="210" cy="183" r="9" fill="#2DD4BF" opacity=".9"/>
-            <text x="210" y="252" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3" fill="#94A3B8">AI&nbsp;SENSOR</text>
+<!-- ============ 3 · HOW IT WORKS ============ -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. <span class="grad">Zero effort.</span></h2>
+      <p>Drop waste into the top. The sensor reads the material, the motor rotates the drum, and the hatch does the rest — all inside a single compact cylinder.</p>
+    </div>
+    <div class="steps">
+      <article class="step glass reveal" style="--d:.05s">
+        <div class="step-num" aria-hidden="true">1</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor" stroke="none"/>
+            <path d="M8.5 15.5a5 5 0 0 1 0-7"/>
+            <path d="M5.7 18.3a9 9 0 0 1 0-12.6"/>
+            <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+            <path d="M18.3 5.7a9 9 0 0 1 0 12.6"/>
           </svg>
         </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ FEATURES ============ -->
-  <section class="section" id="features" aria-labelledby="features-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow" data-i18n="feat.eyebrow">Features</p>
-        <h2 id="features-title" data-i18n-html="feat.title">Intelligent by design. <span class="grad-text">Effortless by default.</span></h2>
-        <p data-i18n="feat.sub">Every part of TTT is built around one idea: making the right sorting decision the easiest one.</p>
-      </div>
-      <div class="features-grid">
-        <article class="card reveal">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/><circle cx="12" cy="12" r="2.4"/></svg>
-          </div>
-          <h3 data-i18n="f1.t">AI Sorting Engine</h3>
-          <p data-i18n="f1.d">Recognises waste type in real-time and auto-updates its model.</p>
-        </article>
-        <article class="card reveal" style="--d:.08s">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2"/><path d="M7 6.3a7 7 0 0 1 10 0"/><path d="M4 9.5a11 11 0 0 1 16 0"/><path d="M12 13a3 3 0 1 0 3 3"/><path d="M12 16v5"/></svg>
-          </div>
-          <h3 data-i18n="f2.t">Zero-UI Feedback</h3>
-          <p data-i18n="f2.d">Colours, sounds &amp; lights guide you. No screens, no apps.</p>
-        </article>
-        <article class="card reveal" style="--d:.16s">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v5h-5"/><path d="M12 8v4l3 2"/></svg>
-          </div>
-          <h3 data-i18n="f3.t">Auto-Updates</h3>
-          <p data-i18n="f3.d">The AI system upgrades itself over the air.</p>
-        </article>
-        <article class="card reveal">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-9 0-15 4-15 11a5 5 0 0 0 5 5c7 0 11-6 10-16z"/><path d="M5 20c3-7 8-11 13-13"/></svg>
-          </div>
-          <h3 data-i18n="f4.t">20% Recycled Materials</h3>
-          <p data-i18n="f4.d">Built with sustainability in mind.</p>
-        </article>
-        <article class="card reveal" style="--d:.08s">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M4 20a6 6 0 0 1 12 0"/><path d="M15.5 9.5l1.8 1.8 3.2-3.4"/></svg>
-          </div>
-          <h3 data-i18n="f5.t">Human-Rights Certified</h3>
-          <p data-i18n="f5.d">Ethical supply chain, verified production.</p>
-        </article>
-        <article class="card reveal" style="--d:.16s">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg>
-          </div>
-          <h3 data-i18n="f6.t">2-Year Warranty</h3>
-          <p data-i18n="f6.d">12 months HSI support + full 2-year guarantee.</p>
-          <span class="tag" data-i18n="f6.tag">Included in price</span>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="section" id="how" aria-labelledby="how-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow" data-i18n="how.eyebrow">How It Works</p>
-        <h2 id="how-title" data-i18n-html="how.title">Three steps. <span class="grad-text">Zero thinking.</span></h2>
-        <p data-i18n="how.sub">The whole sorting decision takes under a second — and never leaves your hands.</p>
-      </div>
-      <ol class="steps" aria-label="Three-step sorting process">
-        <li class="step card reveal">
-          <div class="step-num" aria-hidden="true">1</div>
-          <h3 data-i18n="s1.t">Drop it on the lid</h3>
-          <p data-i18n="s1.d">Place any item on the TTT lid. The onboard sensor wakes up instantly.</p>
-          <span class="connector" aria-hidden="true"></span>
-        </li>
-        <li class="step card reveal" style="--d:.12s">
-          <div class="step-num" aria-hidden="true">2</div>
-          <h3 data-i18n="s2.t">AI identifies the material</h3>
-          <p data-i18n="s2.d">The sorting engine classifies the material and waste stream in real-time.</p>
-          <span class="connector" aria-hidden="true"></span>
-        </li>
-        <li class="step card reveal" style="--d:.24s">
-          <div class="step-num" aria-hidden="true">3</div>
-          <h3 data-i18n="s3.t">Light + sound tells you the bin</h3>
-          <p data-i18n="s3.d">A clear colour and tone point you straight to the right bin. Done.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ SPEC / DELIVERY ============ -->
-  <section class="section" id="delivery" aria-labelledby="delivery-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow" data-i18n="del.eyebrow">Delivery &amp; Specs</p>
-        <h2 id="delivery-title" data-i18n-html="del.title">Everything included. <span class="grad-text">Nothing hidden.</span></h2>
-      </div>
-      <article class="spec-card reveal">
-        <h3 data-i18n="del.h3">What comes in the box — and behind it</h3>
-        <ul class="spec-list">
-          <li class="spec-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong data-i18n="d1.a">Delivery</strong><span data-i18n="d1.b">Within 1 week · Free shipping · Instant tracking</span></div>
-          </li>
-          <li class="spec-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong data-i18n="d2.a">Support</strong><span data-i18n="d2.b">12 months from HSI</span></div>
-          </li>
-          <li class="spec-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong data-i18n="d3.a">Warranty</strong><span data-i18n="d3.b">2 years, full coverage</span></div>
-          </li>
-          <li class="spec-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong data-i18n="d4.a">Materials</strong><span data-i18n="d4.b">≥ 20% recyclable content</span></div>
-          </li>
-          <li class="spec-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong data-i18n="d5.a">In the box</strong><span data-i18n="d5.b">Setup manual + user guide</span></div>
-          </li>
-          <li class="spec-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong data-i18n="d6.a">Ethics</strong><span data-i18n="d6.b">Human-rights-compliant production</span></div>
-          </li>
-        </ul>
+        <h3>Drop it in</h3>
+        <p>The top sensor instantly reads and identifies the material you're dropping — plastic, metal or paper.</p>
+      </article>
+      <div class="connector" aria-hidden="true"></div>
+      <article class="step glass reveal" style="--d:.15s">
+        <div class="step-num" aria-hidden="true">2</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 4.5V2.5M12 21.5v-2M19.5 12h2M2.5 12h2M17.3 6.7l1.4-1.4M5.3 18.7l1.4-1.4M17.3 17.3l1.4 1.4M5.3 5.3l1.4 1.4"/>
+          </svg>
+        </div>
+        <h3>AI sorts it</h3>
+        <p>A silent motor and precision gear train rotate the drum to align the correct compartment with the top hatch.</p>
+      </article>
+      <div class="connector" aria-hidden="true"></div>
+      <article class="step glass reveal" style="--d:.25s">
+        <div class="step-num" aria-hidden="true">3</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 8v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/>
+            <path d="M1 3h22v5H1zM10 12.5l2 2 4.5-4.5"/>
+          </svg>
+        </div>
+        <h3>It locks it in</h3>
+        <p>The hatch opens at the right slot, the waste drops into its compartment, and a light + tone confirms the sort.</p>
       </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ SOCIAL PROOF ============ -->
-  <section class="section" aria-labelledby="proof-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow" data-i18n="proof.eyebrow">Early Voices</p>
-        <h2 id="proof-title" data-i18n="proof.title">What beta users are saying</h2>
-      </div>
-      <div class="quotes">
-        <article class="quote card reveal">
-          <p data-i18n="q1.t">Finally, recycling that doesn't require a PhD.</p>
-          <footer>
-            <span class="avatar" aria-hidden="true">BU</span>
-            <span><strong data-i18n="q1.who">Beta user</strong><em data-i18n="q1.role">Household pilot, Gothenburg</em></span>
-          </footer>
-        </article>
-        <article class="quote card reveal" style="--d:.12s">
-          <p data-i18n="q2.t">Our kitchen waste sorting accuracy went from 60% to 97%.</p>
-          <footer>
-            <span class="avatar" aria-hidden="true">OM</span>
-            <span><strong data-i18n="q2.who">Office manager</strong><em data-i18n="q2.role">Corporate pilot, Härryda</em></span>
-          </footer>
-        </article>
-      </div>
+<!-- ============ 4 · PRODUCT ANATOMY ============ -->
+<section class="section" id="anatomy">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Product anatomy</span>
+      <h2>Inside the <span class="grad">rotating bin</span></h2>
+      <p>One compact cylinder, three compartments. Simple, reliable mechanics doing the heavy lifting — designed in Härryda, Sweden.</p>
     </div>
-  </section>
-
-  <!-- ============ CTA BANNER ============ -->
-  <section class="section" id="preorder" aria-labelledby="cta-title" style="padding-top:1rem">
-    <div class="container">
-      <div class="cta-banner reveal">
-        <h2 id="cta-title" data-i18n="cta.title">Ready to turn your trash into treasure?</h2>
-        <a class="btn btn-white" href="#contact" data-i18n="cta.btn">Pre-Order TTT</a>
-      </div>
+    <div class="glass anatomy-wrap reveal" style="--d:.1s">
+      <svg class="anatomy-svg" viewBox="0 0 760 560" role="img" aria-label="Cutaway diagram of the TTT rotating bin showing sensor, motor and gear, rotating compartments, and slot hatch">
+        <!-- cylinder -->
+        <ellipse cx="380" cy="460" rx="118" ry="28" fill="#0D1526" stroke="rgba(148,163,184,.35)"/>
+        <rect x="262" y="110" width="236" height="350" fill="#111A2E" stroke="rgba(148,163,184,.35)"/>
+        <rect x="274" y="118" width="10" height="336" fill="rgba(255,255,255,.035)"/>
+        <ellipse cx="380" cy="110" rx="118" ry="28" fill="#16233C" stroke="rgba(148,163,184,.4)"/>
+        <!-- sensor on top -->
+        <ellipse cx="380" cy="92" rx="50" ry="13" fill="#0D1526" stroke="rgba(45,212,191,.55)"/>
+        <ellipse cx="380" cy="78" rx="27" ry="13" fill="#10B981"/>
+        <ellipse cx="380" cy="74" rx="15" ry="6.5" fill="#6EE7B7" opacity=".9"/>
+        <!-- motor block -->
+        <rect x="468" y="196" width="28" height="46" rx="6" fill="#1E293B" stroke="rgba(148,163,184,.45)"/>
+        <line x1="468" y1="219" x2="452" y2="219" stroke="rgba(148,163,184,.5)" stroke-width="3"/>
+        <!-- gear -->
+        <g stroke="#94A3B8" fill="#28354A">
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(0 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(45 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(90 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(135 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(180 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(225 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(270 445 216)"/>
+          <rect x="441" y="186" width="8" height="11" rx="2" transform="rotate(315 445 216)"/>
+        </g>
+        <circle cx="445" cy="216" r="16" fill="#28354A" stroke="#94A3B8"/>
+        <circle cx="445" cy="216" r="5" fill="#0B1120" stroke="#94A3B8"/>
+                <!-- cutaway window -->
+        <rect x="298" y="252" width="164" height="196" rx="18" fill="#0B1120" stroke="rgba(148,163,184,.35)" stroke-dasharray="5 6"/>
+        <!-- rotating drum (3 sectors) -->
+        <g class="drum-spin">
+          <path d="M380 368 L380 298 A70 70 0 0 1 440.6 403 Z" fill="#3B82F6" opacity=".85" stroke="#0B1120"/>
+          <path d="M380 368 L440.6 403 A70 70 0 0 1 319.4 403 Z" fill="#10B981" opacity=".85" stroke="#0B1120"/>
+          <path d="M380 368 L319.4 403 A70 70 0 0 1 380 298 Z" fill="#FACC15" opacity=".85" stroke="#0B1120"/>
+          <circle cx="380" cy="368" r="14" fill="#1E293B" stroke="#94A3B8"/>
+          <circle cx="380" cy="368" r="4" fill="#94A3B8"/>
+        </g>
+        <path d="M299 322 A84 84 0 0 1 330 285" fill="none" stroke="rgba(148,163,184,.5)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M330 285 l-9 1.5 M330 285 l-2.5 8.5" stroke="rgba(148,163,184,.5)" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- hatch (open flap) -->
+        <path d="M298 254 L330 268 L330 294 L298 282 Z" fill="rgba(245,158,11,.16)" stroke="#F59E0B" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M330 268 L342 273 M330 294 L342 289" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- callouts: right -->
+        <line x1="571" y1="116" x2="434" y2="90" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
+        <circle cx="430" cy="89" r="3.5" fill="#2DD4BF"/>
+        <text x="575" y="121" font-size="15" font-weight="600" fill="#E2E8F0">Sensor läser av materialet</text>
+        <line x1="571" y1="232" x2="472" y2="218" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
+        <circle cx="468" cy="217" r="3.5" fill="#2DD4BF"/>
+        <text x="575" y="237" font-size="15" font-weight="600" fill="#E2E8F0">Motor och kuggjul</text>
+        <line x1="571" y1="366" x2="454" y2="368" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
+        <circle cx="450" cy="368" r="3.5" fill="#2DD4BF"/>
+        <text x="575" y="371" font-size="15" font-weight="600" fill="#E2E8F0">Roterande fack</text>
+        <!-- callout: left -->
+        <line x1="189" y1="250" x2="300" y2="262" stroke="rgba(45,212,191,.5)" stroke-width="1"/>
+        <circle cx="302" cy="263" r="3.5" fill="#2DD4BF"/>
+        <text x="185" y="245" font-size="15" font-weight="600" fill="#E2E8F0" text-anchor="end">Lucka öppnas vid rätt fack</text>
+      </svg>
+      <ul class="legend" aria-label="Compartment color code">
+        <li><span class="swatch" style="background:#3B82F6"></span>Blue — Plastic</li>
+        <li><span class="swatch" style="background:#10B981"></span>Green — Metal</li>
+        <li><span class="swatch" style="background:#FACC15"></span>Yellow — Paper</li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
+<!-- ============ 5 · FEATURES ============ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Engineered to <span class="grad">just work</span></h2>
+      <p>Every part earns its place — from the auto-updating AI model to the recycled materials in the shell.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature glass reveal" style="--d:.05s">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 2v3M14 2v3M10 19v3M14 19v3M2 10h3M2 14h3M19 10h3M19 14h3"/></svg>
+        </div>
+        <h3>AI Sorting Engine</h3>
+        <p>Real-time material recognition with auto-updating model.</p>
+      </article>
+      <article class="feature glass reveal" style="--d:.1s">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/><path d="M12 2v2" opacity=".7"/></svg>
+        </div>
+        <h3>Zero-UI Feedback</h3>
+        <p>Colours, lights &amp; sounds guide you. No screens, no apps.</p>
+      </article>
+      <article class="feature glass reveal" style="--d:.15s">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 9h6"/><path d="M14 12h4M16 10v4"/></svg>
+        </div>
+        <h3>Compact &amp; Space-Saving</h3>
+        <p>Multiple compartments in a single small footprint.</p>
+      </article>
+      <article class="feature glass reveal" style="--d:.2s">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4 16.6 16.6M7.4 7.4 5.6 5.6"/></svg>
+        </div>
+        <h3>Simple, Reliable Mechanics</h3>
+        <p>Motor-driven rotation, built to last.</p>
+      </article>
+      <article class="feature glass reveal" style="--d:.25s">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12c0 6-4 9-9 9-1.5 0-3-.4-4-1 0-5 2.5-9.5 10-12-1 2-2.5 3.5-5 5 4-2.5 8-3 8-1Z"/><path d="M7 16C9 10 13 7 17 5"/></svg>
+        </div>
+        <h3>Sustainable Build</h3>
+        <p>≥ 20% recycled/reusable materials, ethical production.</p>
+      </article>
+      <article class="feature glass reveal" style="--d:.3s">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4.5 5v6c0 5 3.2 8.6 7.5 10.5 4.3-1.9 7.5-5.5 7.5-10.5V5L12 2Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg>
+        </div>
+        <h3>2-Year Warranty</h3>
+        <p>12 months HSI support + full 2-year guarantee.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · SPECS / DELIVERY ============ -->
+<section class="section" id="specs">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Specs &amp; delivery</span>
+      <h2>The fine print, <span class="grad">without the fine print</span></h2>
+      <p>Everything that comes in the box — and everything we stand behind.</p>
+    </div>
+    <div class="glass specs-card reveal" style="--d:.1s">
+      <ul class="specs-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Delivery</strong><span>Within 1 week · Free shipping · Instant tracking number</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Support</strong><span>12 months from HSI</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Warranty</strong><span>2 years</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Materials</strong><span>≥ 20% reusable/recyclable</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Includes</strong><span>Installation manual + User guide</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Production</strong><span>Human-rights compliant</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · SOCIAL PROOF ============ -->
+<section class="section" id="proof">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Early feedback</span>
+      <h2>People who tried it, <span class="grad">kept it</span></h2>
+    </div>
+    <div class="quotes-grid">
+      <figure class="quote glass reveal" style="--d:.05s">
+        <p>Finally, recycling that doesn't require a PhD. I drop it in and walk away — it just works.</p>
+        <footer>
+          <span class="avatar" aria-hidden="true">BU</span>
+          <div><strong>Beta user</strong><span>Home pilot program, Spring 2026</span></div>
+        </footer>
+      </figure>
+      <figure class="quote glass reveal" style="--d:.15s">
+        <p>Our sorting accuracy went from 60% to 97%. The rotating bin paid for itself in fewer missed collections.</p>
+        <footer>
+          <span class="avatar" aria-hidden="true">OM</span>
+          <div><strong>Office manager</strong><span>32-person office, Gothenburg</span></div>
+        </footer>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · CTA BANNER ============ -->
+<section class="section" id="preorder" style="padding-top:0">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Ready to turn your trash into treasure?</h2>
+      <p>Pre-order TTT today — delivered within a week, with free shipping.</p>
+      <a class="btn btn-white" href="#contact">Pre-Order TTT
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer" id="contact">
-  <div class="container footer-grid">
+<!-- ============ 9 · FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="container footer-inner">
     <div class="footer-brand">
-      <svg class="logo-badge" role="img" aria-label="TTT logo"><use href="#logo-badge"/></svg>
-      <p data-i18n-html="foot.line">© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden<br/>
-      <a href="mailto:hello@ttt-hsi.se" style="color:var(--teal);font-weight:600">hello@ttt-hsi.se</a></p>
+      <svg class="brand-badge" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <circle cx="32" cy="32" r="29.5" fill="#0F172A" stroke="#10B981" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="23.5" fill="none" stroke="rgba(148,163,184,.3)" stroke-width="1" stroke-dasharray="2.5 5"/>
+        <path d="M19 28c0-10 7.5-15 17-15 0 10-6.5 15-17 15Z" fill="#10B981"/>
+        <path d="M21.5 26.5C26 20.5 31 16 33.5 14.5" stroke="#04211A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+        <path d="M39 23.5h7.5V31" stroke="#F59E0B" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+        <circle cx="48.5" cy="31" r="2.1" fill="#F59E0B"/>
+        <text x="32" y="47.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="15.5" font-weight="900" letter-spacing="1.5" fill="#E2E8F0">TTT</text>
+      </svg>
+      <div>
+        <p style="color:var(--text);font-weight:700;font-size:.9rem">TTT — Trash to Treasure</p>
+        <p>© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden</p>
+      </div>
     </div>
     <nav class="footer-links" aria-label="Footer">
-      <a href="#top" data-i18n="foot.privacy">Privacy</a>
-      <a href="#top" data-i18n="foot.terms">Terms</a>
-      <a href="mailto:hello@ttt-hsi.se" data-i18n="nav.contact">Contact</a>
+      <a href="#top">Privacy</a>
+      <a href="#top">Terms</a>
+      <a href="mailto:hello@ttt-hsi.se">Contact</a>
     </nav>
   </div>
 </footer>
 
-<!-- ============ DEMO MODAL ============ -->
-<div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-title">
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-panel">
-    <button class="modal-close" type="button" data-close data-i18n-attr="aria-label" data-i18n-key="modal.close" aria-label="Close demo">×</button>
-    <svg class="logo-badge" role="img" aria-label="TTT logo"><use href="#logo-badge"/></svg>
-    <h3 id="demo-title" data-i18n="modal.title">Product demo</h3>
-    <p data-i18n="modal.p">Our 60-second TTT demo video is on its way. Drop it on the lid — watch the lights, hear the tone, find the bin. Launching with the first pre-order batch.</p>
-    <a class="btn btn-primary" href="#preorder" data-close data-i18n="cta.btn">Pre-Order TTT</a>
-  </div>
-</div>
-
 <script>
-(function () {
-  "use strict";
+(function(){
+  var nav=document.getElementById('navbar');
+  function onScroll(){nav.classList.toggle('scrolled',window.scrollY>24);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-  /* ---------- i18n: EN / SV ---------- */
-  var I18N = {
-    en: {
-      docTitle: "TTT – Trash to Treasure · AI Smart Waste-Sorting Lid by HSI",
-      metaDesc: "TTT is HSI's AI-powered smart lid that sorts your waste automatically — no app, no menus, just clear signals. Pre-order today.",
-      "brand.tag": "Trash to Treasure by HSI",
-      "nav.overview": "Overview",
-      "nav.features": "Features",
-      "nav.how": "How It Works",
-      "nav.delivery": "Delivery",
-      "nav.contact": "Contact",
-      "nav.preorder": "Pre-Order",
-      "hero.eyebrow": "AI-Powered · Made by HSI, Sweden",
-      "hero.title": "Sort Waste. Save the Planet. <span class=\"grad-text\">Automatically.</span>",
-      "hero.lead": "TTT is the AI-powered lid that tells you exactly where every piece of trash belongs — no app, no menus, just clear signals.",
-      "hero.cta": "Pre-Order Now",
-      "hero.demo": "Watch Demo",
-      "hero.t1": "Ships in 1 week",
-      "hero.t2": "2-year warranty",
-      "hero.t3": "20% recycled build",
-      "hero.artLabel": "TTT smart lid with a central AI sensor and green, orange and red indicator lights",
-      "feat.eyebrow": "Features",
-      "feat.title": "Intelligent by design. <span class=\"grad-text\">Effortless by default.</span>",
-      "feat.sub": "Every part of TTT is built around one idea: making the right sorting decision the easiest one.",
-      "f1.t": "AI Sorting Engine",
-      "f1.d": "Recognises waste type in real-time and auto-updates its model.",
-      "f2.t": "Zero-UI Feedback",
-      "f2.d": "Colours, sounds &amp; lights guide you. No screens, no apps.",
-      "f3.t": "Auto-Updates",
-      "f3.d": "The AI system upgrades itself over the air.",
-      "f4.t": "20% Recycled Materials",
-      "f4.d": "Built with sustainability in mind.",
-      "f5.t": "Human-Rights Certified",
-      "f5.d": "Ethical supply chain, verified production.",
-      "f6.t": "2-Year Warranty",
-      "f6.d": "12 months HSI support + full 2-year guarantee.",
-      "f6.tag": "Included in price",
-      "how.eyebrow": "How It Works",
-      "how.title": "Three steps. <span class=\"grad-text\">Zero thinking.</span>",
-      "how.sub": "The whole sorting decision takes under a second — and never leaves your hands.",
-      "s1.t": "Drop it on the lid",
-      "s1.d": "Place any item on the TTT lid. The onboard sensor wakes up instantly.",
-      "s2.t": "AI identifies the material",
-      "s2.d": "The sorting engine classifies the material and waste stream in real-time.",
-      "s3.t": "Light + sound tells you the bin",
-      "s3.d": "A clear colour and tone point you straight to the right bin. Done.",
-      "del.eyebrow": "Delivery &amp; Specs",
-      "del.title": "Everything included. <span class=\"grad-text\">Nothing hidden.</span>",
-      "del.h3": "What comes in the box — and behind it",
-      "d1.a": "Delivery",
-      "d1.b": "Within 1 week · Free shipping · Instant tracking",
-      "d2.a": "Support",
-      "d2.b": "12 months from HSI",
-      "d3.a": "Warranty",
-      "d3.b": "2 years, full coverage",
-      "d4.a": "Materials",
-      "d4.b": "≥ 20% recyclable content",
-      "d5.a": "In the box",
-      "d5.b": "Setup manual + user guide",
-      "d6.a": "Ethics",
-      "d6.b": "Human-rights-compliant production",
-      "proof.eyebrow": "Early Voices",
-      "proof.title": "What beta users are saying",
-      "q1.t": "Finally, recycling that doesn't require a PhD.",
-      "q1.who": "Beta user",
-      "q1.role": "Household pilot, Gothenburg",
-      "q2.t": "Our kitchen waste sorting accuracy went from 60% to 97%.",
-      "q2.who": "Office manager",
-      "q2.role": "Corporate pilot, Härryda",
-      "cta.title": "Ready to turn your trash into treasure?",
-      "cta.btn": "Pre-Order TTT",
-      "foot.line": "© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden<br/><a href=\"mailto:hello@ttt-hsi.se\" style=\"color:var(--teal);font-weight:600\">hello@ttt-hsi.se</a>",
-      "foot.privacy": "Privacy",
-      "foot.terms": "Terms",
-      "modal.title": "Product demo",
-      "modal.p": "Our 60-second TTT demo video is on its way. Drop it on the lid — watch the lights, hear the tone, find the bin. Launching with the first pre-order batch.",
-      "modal.close": "Close demo"
-    },
-    sv: {
-      docTitle: "TTT – Sopor till Skatt · AI-lokk för avfallssortering av HSI",
-      metaDesc: "TTT är HSIs AI-lokk som sorterar ditt avfall automatiskt — ingen app, inga menyer, bara tydliga signaler. Förbeställ idag.",
-      "brand.tag": "Sopor till Skatt av HSI",
-      "nav.overview": "Översikt",
-      "nav.features": "Funktioner",
-      "nav.how": "Så fungerar det",
-      "nav.delivery": "Leverans",
-      "nav.contact": "Kontakt",
-      "nav.preorder": "Förbeställ",
-      "hero.eyebrow": "AI-driven · Tillverkad av HSI, Sverige",
-      "hero.title": "Sortera sopor. Rädda planeten. <span class=\"grad-text\">Automatiskt.</span>",
-      "hero.lead": "TTT är locket med AI som visar exakt var varje avfallstyp hör hemma — ingen app, inga menyer, bara tydliga signaler.",
-      "hero.cta": "Förbeställ nu",
-      "hero.demo": "Se demovideo",
-      "hero.t1": "Leverans inom 1 vecka",
-      "hero.t2": "2 års garanti",
-      "hero.t3": "20% återvunnet material",
-      "hero.artLabel": "TTT smartlokk med central AI-sensor och gröna, orangea och röda indikatorljus",
-      "feat.eyebrow": "Funktioner",
-      "feat.title": "Intelligent i grunden. <span class=\"grad-text\">Obemärkt i bruk.</span>",
-      "feat.sub": "Varje del av TTT är byggd kring en enda idé: att göra rätt sortsbeslut till det enklaste.",
-      "f1.t": "AI-sortsengine",
-      "f1.d": "Identifierar avfallstyp i realtid och uppdaterar sin modell automatiskt.",
-      "f2.t": "Utan skärm eller app",
-      "f2.d": "Färger, ljud och ljus guidar dig. Inga skärmar, inga appar.",
-      "f3.t": "Automatiska uppdateringar",
-      "f3.d": "AI-systemet uppgraderas själv via OTA.",
-      "f4.t": "20% återvunnet material",
-      "f4.d": "Tillverkat med hållbarhet i fokus.",
-      "f5.t": "Certifierad för mänskliga rättigheter",
-      "f5.d": "Etisk leverantörskedja, verifierad produktion.",
-      "f6.t": "2 års garanti",
-      "f6.d": "12 månader support från HSI + full garanti i 2 år.",
-      "f6.tag": "Inkluderat i priset",
-      "how.eyebrow": "Så fungerar det",
-      "how.title": "Tre steg. <span class=\"grad-text\">Noll eftertanke.</span>",
-      "how.sub": "Hela sortsbeslutet tar under en sekund — och kräver aldrig händerna.",
-      "s1.t": "Lägg det på locket",
-      "s1.d": "Placera valfritt föremål på TTT-locket. Sensorn vaknar omedelbart.",
-      "s2.t": "AI:n känner igen materialet",
-      "s2.d": "Sorteringsmotorn klassar materialet och rätt avfallsström i realtid.",
-      "s3.t": "Ljus + ton visar rätt soptunna",
-      "s3.d": "En tydlig färg och ton pekar rakt på rätt soptunna. Klart.",
-      "del.eyebrow": "Leverans &amp; specifikationer",
-      "del.title": "Allt ingår. <span class=\"grad-text\">Inget dolt.</span>",
-      "del.h3": "Vad som ligger i lådan — och bakom det",
-      "d1.a": "Leverans",
-      "d1.b": "Inom 1 vecka · Fri frakt · Omedelbar spårning",
-      "d2.a": "Support",
-      "d2.b": "12 månader från HSI",
-      "d3.a": "Garanti",
-      "d3.b": "2 år, full täckning",
-      "d4.a": "Material",
-      "d4.b": "Minst 20% återvunnet innehåll",
-      "d5.a": "I lådan",
-      "d5.b": "Installationsmanual + användarguide",
-      "d6.a": "Etik",
-      "d6.b": "Produktion i enlighet med mänskliga rättigheter",
-      "proof.eyebrow": "Tidiga röster",
-      "proof.title": "Vad beta-användare säger",
-      "q1.t": "Slutligen, återvinning som inte kräver en filosofiexamen.",
-      "q1.who": "Beta-användare",
-      "q1.role": "Hushållspilot, Göteborg",
-      "q2.t": "Vår sorteringsprecision i köket gick från 60 % till 97 %.",
-      "q2.who": "Kontorschef",
-      "q2.role": "Företagspilot, Härryda",
-      "cta.title": "Redo att förvandla dina sopor till skatt?",
-      "cta.btn": "Förbeställ TTT",
-      "foot.line": "© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sverige<br/><a href=\"mailto:hello@ttt-hsi.se\" style=\"color:var(--teal);font-weight:600\">hello@ttt-hsi.se</a>",
-      "foot.privacy": "Sekretess",
-      "foot.terms": "Villkor",
-      "modal.title": "Produktdemonstration",
-      "modal.p": "Vår 60-sekunders demovideo för TTT är på väg. Lägg det på locket — titta på ljusen, hör tonen, hitta soptunnan. Släpps med första förbeställningspartiet.",
-      "modal.close": "Stäng demovideo"
-    }
-  };
-
-  function applyLang(lang) {
-    if (!I18N[lang]) lang = "en";
-    var dict = I18N[lang];
-    document.documentElement.setAttribute("lang", lang);
-    document.title = dict.docTitle;
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", dict.metaDesc);
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var key = el.getAttribute("data-i18n");
-      if (dict[key] !== undefined) el.textContent = dict[key];
+  var toggle=document.getElementById('nav-toggle');
+  toggle.addEventListener('click',function(){
+    var open=nav.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded',String(open));
+  });
+  document.querySelectorAll('#nav-menu a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded','false');
     });
-    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-      var key = el.getAttribute("data-i18n-html");
-      if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
     });
-    document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
-      var attr = el.getAttribute("data-i18n-attr");
-      var key = el.getAttribute("data-i18n-key");
-      if (dict[key] !== undefined) el.setAttribute(attr, dict[key]);
-    });
-    document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-      var active = btn.getAttribute("data-lang") === lang;
-      btn.classList.toggle("active", active);
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-    try { localStorage.setItem("ttt-lang", lang); } catch (e) { /* ignore */ }
-  }
-
-  var savedLang = "en";
-  try { savedLang = localStorage.getItem("ttt-lang") || "en"; } catch (e) { /* ignore */ }
-  applyLang(savedLang);
-  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-    btn.addEventListener("click", function () { applyLang(btn.getAttribute("data-lang")); });
-  });
-
-  /* ---------- Navbar glass on scroll ---------- */
-  var header = document.getElementById("site-header");
-  var onScroll = function () {
-    header.classList.toggle("scrolled", window.scrollY > 24);
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  /* ---------- Mobile nav toggle ---------- */
-  var toggle = document.getElementById("nav-toggle");
-  var links = document.getElementById("nav-links");
-  toggle.addEventListener("click", function () {
-    var open = links.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-  });
-  links.addEventListener("click", function (e) {
-    if (e.target.closest("a")) {
-      links.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    }
-  });
-
-  /* ---------- Scroll reveal (staggered) ---------- */
-  var revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add("in"); });
-  }
-
-  /* ---------- Hero particles (CSS-only animation, JS just spawns) ---------- */
-  var hero = document.querySelector(".hero");
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (hero && !reduceMotion) {
-    for (var i = 0; i < 14; i++) {
-      var p = document.createElement("span");
-      p.className = "particle";
-      var size = 3 + Math.random() * 5;
-      p.style.width = size + "px";
-      p.style.height = size + "px";
-      p.style.left = Math.random() * 100 + "%";
-      p.style.animationDuration = 9 + Math.random() * 12 + "s";
-      p.style.animationDelay = -Math.random() * 18 + "s";
-      p.style.opacity = String(0.25 + Math.random() * 0.4);
-      hero.appendChild(p);
-    }
-  }
-
-  /* ---------- Demo modal ---------- */
-  var modal = document.getElementById("demo-modal");
-  var openBtn = document.getElementById("demo-btn");
-  var lastFocus = null;
-  function openModal() {
-    lastFocus = document.activeElement;
-    modal.classList.add("open");
-    document.body.style.overflow = "hidden";
-    modal.querySelector(".modal-close").focus();
-  }
-  function closeModal() {
-    modal.classList.remove("open");
-    document.body.style.overflow = "";
-    if (lastFocus) lastFocus.focus();
-  }
-  openBtn.addEventListener("click", openModal);
-  modal.addEventListener("click", function (e) {
-    if (e.target.closest("[data-close]")) closeModal();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
-  });
+  },{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 })();
 </script>
 </body>
 </html>
-
-
