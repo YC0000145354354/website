@@ -180,6 +180,10 @@ section{scroll-margin-top:96px}
   .reveal{opacity:1;transform:none;transition:none}
   .lid-stage,.particle,.scan-ring,.led-glow,.connector,.step::before,.hero::before,.hero::after{animation:none}
 }
+.lang-switch{display:inline-flex;align-items:center;gap:.15rem;background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.3);border-radius:999px;padding:.22rem;flex:none}
+.lang-switch button{background:none;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.05em;color:var(--muted);padding:.38rem .8rem;border-radius:999px;transition:color .2s ease,background .2s ease,box-shadow .2s ease}
+.lang-switch button:hover,.lang-switch button:focus-visible{color:var(--text)}
+.lang-switch button.active{background:linear-gradient(90deg,#10B981,#2DD4BF);color:#04211a;box-shadow:0 2px 12px rgba(45,212,191,.4)}
 </style>
 </head>
 <body>
@@ -239,19 +243,23 @@ section{scroll-margin-top:96px}
       <svg class="logo-badge" role="img" aria-label="TTT logo"><use href="#logo-badge"/></svg>
       <span class="brand-text">
         <span class="brand-name">TTT</span>
-        <span class="brand-tag">Trash to Treasure by HSI</span>
+        <span class="brand-tag" data-i18n="brand.tag">Trash to Treasure by HSI</span>
       </span>
     </a>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
+    <div class="lang-switch" role="group" aria-label="Språk / Language">
+      <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+      <button type="button" data-lang="sv" aria-pressed="false">SV</button>
+    </div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#delivery">Delivery</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a class="btn btn-primary nav-cta" href="#preorder">Pre-Order</a></li>
+      <li><a href="#overview" data-i18n="nav.overview">Overview</a></li>
+      <li><a href="#features" data-i18n="nav.features">Features</a></li>
+      <li><a href="#how" data-i18n="nav.how">How It Works</a></li>
+      <li><a href="#delivery" data-i18n="nav.delivery">Delivery</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a class="btn btn-primary nav-cta" href="#preorder" data-i18n="nav.preorder">Pre-Order</a></li>
     </ul>
   </nav>
 </header>
@@ -262,26 +270,26 @@ section{scroll-margin-top:96px}
   <section class="hero" id="overview" aria-labelledby="hero-title">
     <div class="container hero-grid">
       <div class="hero-copy reveal">
-        <span class="hero-eyebrow"><span class="dot" aria-hidden="true"></span>AI-Powered · Made by HSI, Sweden</span>
-        <h1 id="hero-title">Sort Waste. Save the Planet. <span class="grad-text">Automatically.</span></h1>
-        <p class="lead">TTT is the AI-powered lid that tells you exactly where every piece of trash belongs — no app, no menus, just clear signals.</p>
+        <span class="hero-eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.eyebrow">AI-Powered · Made by HSI, Sweden</span></span>
+        <h1 id="hero-title" data-i18n-html="hero.title">Sort Waste. Save the Planet. <span class="grad-text">Automatically.</span></h1>
+        <p class="lead" data-i18n="hero.lead">TTT is the AI-powered lid that tells you exactly where every piece of trash belongs — no app, no menus, just clear signals.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#preorder">Pre-Order Now</a>
+          <a class="btn btn-primary" href="#preorder" data-i18n="hero.cta">Pre-Order Now</a>
           <button class="btn btn-ghost" id="demo-btn" type="button">
             <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.5l5 3.5-5 3.5v-7z" fill="currentColor"/></svg>
-            Watch Demo
+            <span data-i18n="hero.demo">Watch Demo</span>
           </button>
         </div>
         <ul class="hero-trust" aria-label="Highlights">
-          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg>Ships in 1 week</span></li>
-          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg>2-year warranty</span></li>
-          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg>20% recycled build</span></li>
+          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg><span data-i18n="hero.t1">Ships in 1 week</span></span></li>
+          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg><span data-i18n="hero.t2">2-year warranty</span></span></li>
+          <li><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-check"/></svg><span data-i18n="hero.t3">20% recycled build</span></span></li>
         </ul>
       </div>
 
       <div class="hero-art reveal" style="--d:.15s">
         <div class="lid-stage">
-          <svg viewBox="0 0 420 420" role="img" aria-label="TTT smart lid with a central AI sensor and green, orange and red indicator lights">
+          <svg viewBox="0 0 420 420" role="img" data-i18n-attr="aria-label" data-i18n-key="hero.artLabel" aria-label="TTT smart lid with a central AI sensor and green, orange and red indicator lights">
             <defs>
               <radialGradient id="lid-top" cx="38%" cy="30%" r="80%">
                 <stop offset="0" stop-color="#3B4A63"/>
@@ -341,53 +349,53 @@ section{scroll-margin-top:96px}
   <section class="section" id="features" aria-labelledby="features-title">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Features</p>
-        <h2 id="features-title">Intelligent by design. <span class="grad-text">Effortless by default.</span></h2>
-        <p>Every part of TTT is built around one idea: making the right sorting decision the easiest one.</p>
+        <p class="eyebrow" data-i18n="feat.eyebrow">Features</p>
+        <h2 id="features-title" data-i18n-html="feat.title">Intelligent by design. <span class="grad-text">Effortless by default.</span></h2>
+        <p data-i18n="feat.sub">Every part of TTT is built around one idea: making the right sorting decision the easiest one.</p>
       </div>
       <div class="features-grid">
         <article class="card reveal">
           <div class="feature-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/><circle cx="12" cy="12" r="2.4"/></svg>
           </div>
-          <h3>AI Sorting Engine</h3>
-          <p>Recognises waste type in real-time and auto-updates its model.</p>
+          <h3 data-i18n="f1.t">AI Sorting Engine</h3>
+          <p data-i18n="f1.d">Recognises waste type in real-time and auto-updates its model.</p>
         </article>
         <article class="card reveal" style="--d:.08s">
           <div class="feature-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2"/><path d="M7 6.3a7 7 0 0 1 10 0"/><path d="M4 9.5a11 11 0 0 1 16 0"/><path d="M12 13a3 3 0 1 0 3 3"/><path d="M12 16v5"/></svg>
           </div>
-          <h3>Zero-UI Feedback</h3>
-          <p>Colours, sounds &amp; lights guide you. No screens, no apps.</p>
+          <h3 data-i18n="f2.t">Zero-UI Feedback</h3>
+          <p data-i18n="f2.d">Colours, sounds &amp; lights guide you. No screens, no apps.</p>
         </article>
         <article class="card reveal" style="--d:.16s">
           <div class="feature-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v5h-5"/><path d="M12 8v4l3 2"/></svg>
           </div>
-          <h3>Auto-Updates</h3>
-          <p>The AI system upgrades itself over the air.</p>
+          <h3 data-i18n="f3.t">Auto-Updates</h3>
+          <p data-i18n="f3.d">The AI system upgrades itself over the air.</p>
         </article>
         <article class="card reveal">
           <div class="feature-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-9 0-15 4-15 11a5 5 0 0 0 5 5c7 0 11-6 10-16z"/><path d="M5 20c3-7 8-11 13-13"/></svg>
           </div>
-          <h3>20% Recycled Materials</h3>
-          <p>Built with sustainability in mind.</p>
+          <h3 data-i18n="f4.t">20% Recycled Materials</h3>
+          <p data-i18n="f4.d">Built with sustainability in mind.</p>
         </article>
         <article class="card reveal" style="--d:.08s">
           <div class="feature-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M4 20a6 6 0 0 1 12 0"/><path d="M15.5 9.5l1.8 1.8 3.2-3.4"/></svg>
           </div>
-          <h3>Human-Rights Certified</h3>
-          <p>Ethical supply chain, verified production.</p>
+          <h3 data-i18n="f5.t">Human-Rights Certified</h3>
+          <p data-i18n="f5.d">Ethical supply chain, verified production.</p>
         </article>
         <article class="card reveal" style="--d:.16s">
           <div class="feature-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg>
           </div>
-          <h3>2-Year Warranty</h3>
-          <p>12 months HSI support + full 2-year guarantee.</p>
-          <span class="tag">Included in price</span>
+          <h3 data-i18n="f6.t">2-Year Warranty</h3>
+          <p data-i18n="f6.d">12 months HSI support + full 2-year guarantee.</p>
+          <span class="tag" data-i18n="f6.tag">Included in price</span>
         </article>
       </div>
     </div>
@@ -397,27 +405,27 @@ section{scroll-margin-top:96px}
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">How It Works</p>
-        <h2 id="how-title">Three steps. <span class="grad-text">Zero thinking.</span></h2>
-        <p>The whole sorting decision takes under a second — and never leaves your hands.</p>
+        <p class="eyebrow" data-i18n="how.eyebrow">How It Works</p>
+        <h2 id="how-title" data-i18n-html="how.title">Three steps. <span class="grad-text">Zero thinking.</span></h2>
+        <p data-i18n="how.sub">The whole sorting decision takes under a second — and never leaves your hands.</p>
       </div>
       <ol class="steps" aria-label="Three-step sorting process">
         <li class="step card reveal">
           <div class="step-num" aria-hidden="true">1</div>
-          <h3>Drop it on the lid</h3>
-          <p>Place any item on the TTT lid. The onboard sensor wakes up instantly.</p>
+          <h3 data-i18n="s1.t">Drop it on the lid</h3>
+          <p data-i18n="s1.d">Place any item on the TTT lid. The onboard sensor wakes up instantly.</p>
           <span class="connector" aria-hidden="true"></span>
         </li>
         <li class="step card reveal" style="--d:.12s">
           <div class="step-num" aria-hidden="true">2</div>
-          <h3>AI identifies the material</h3>
-          <p>The sorting engine classifies the material and waste stream in real-time.</p>
+          <h3 data-i18n="s2.t">AI identifies the material</h3>
+          <p data-i18n="s2.d">The sorting engine classifies the material and waste stream in real-time.</p>
           <span class="connector" aria-hidden="true"></span>
         </li>
         <li class="step card reveal" style="--d:.24s">
           <div class="step-num" aria-hidden="true">3</div>
-          <h3>Light + sound tells you the bin</h3>
-          <p>A clear colour and tone point you straight to the right bin. Done.</p>
+          <h3 data-i18n="s3.t">Light + sound tells you the bin</h3>
+          <p data-i18n="s3.d">A clear colour and tone point you straight to the right bin. Done.</p>
         </li>
       </ol>
     </div>
@@ -427,35 +435,35 @@ section{scroll-margin-top:96px}
   <section class="section" id="delivery" aria-labelledby="delivery-title">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Delivery &amp; Specs</p>
-        <h2 id="delivery-title">Everything included. <span class="grad-text">Nothing hidden.</span></h2>
+        <p class="eyebrow" data-i18n="del.eyebrow">Delivery &amp; Specs</p>
+        <h2 id="delivery-title" data-i18n-html="del.title">Everything included. <span class="grad-text">Nothing hidden.</span></h2>
       </div>
       <article class="spec-card reveal">
-        <h3>What comes in the box — and behind it</h3>
+        <h3 data-i18n="del.h3">What comes in the box — and behind it</h3>
         <ul class="spec-list">
           <li class="spec-item">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong>Delivery</strong><span>Within 1 week · Free shipping · Instant tracking</span></div>
+            <div><strong data-i18n="d1.a">Delivery</strong><span data-i18n="d1.b">Within 1 week · Free shipping · Instant tracking</span></div>
           </li>
           <li class="spec-item">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong>Support</strong><span>12 months from HSI</span></div>
+            <div><strong data-i18n="d2.a">Support</strong><span data-i18n="d2.b">12 months from HSI</span></div>
           </li>
           <li class="spec-item">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong>Warranty</strong><span>2 years, full coverage</span></div>
+            <div><strong data-i18n="d3.a">Warranty</strong><span data-i18n="d3.b">2 years, full coverage</span></div>
           </li>
           <li class="spec-item">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong>Materials</strong><span>≥ 20% reusable / recyclable</span></div>
+            <div><strong data-i18n="d4.a">Materials</strong><span data-i18n="d4.b">≥ 20% recyclable content</span></div>
           </li>
           <li class="spec-item">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong>Includes</strong><span>Installation manual + User guide</span></div>
+            <div><strong data-i18n="d5.a">In the box</strong><span data-i18n="d5.b">Setup manual + user guide</span></div>
           </li>
           <li class="spec-item">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div><strong>Ethics</strong><span>Human-rights compliant production</span></div>
+            <div><strong data-i18n="d6.a">Ethics</strong><span data-i18n="d6.b">Human-rights-compliant production</span></div>
           </li>
         </ul>
       </article>
@@ -466,22 +474,22 @@ section{scroll-margin-top:96px}
   <section class="section" aria-labelledby="proof-title">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Early Voices</p>
-        <h2 id="proof-title">What beta users are saying</h2>
+        <p class="eyebrow" data-i18n="proof.eyebrow">Early Voices</p>
+        <h2 id="proof-title" data-i18n="proof.title">What beta users are saying</h2>
       </div>
       <div class="quotes">
         <article class="quote card reveal">
-          <p>Finally, recycling that doesn't require a PhD.</p>
+          <p data-i18n="q1.t">Finally, recycling that doesn't require a PhD.</p>
           <footer>
             <span class="avatar" aria-hidden="true">BU</span>
-            <span><strong>Beta user</strong><em>Household pilot, Gothenburg</em></span>
+            <span><strong data-i18n="q1.who">Beta user</strong><em data-i18n="q1.role">Household pilot, Gothenburg</em></span>
           </footer>
         </article>
         <article class="quote card reveal" style="--d:.12s">
-          <p>Our kitchen waste sorting accuracy went from 60% to 97%.</p>
+          <p data-i18n="q2.t">Our kitchen waste sorting accuracy went from 60% to 97%.</p>
           <footer>
             <span class="avatar" aria-hidden="true">OM</span>
-            <span><strong>Office manager</strong><em>Corporate pilot, Härryda</em></span>
+            <span><strong data-i18n="q2.who">Office manager</strong><em data-i18n="q2.role">Corporate pilot, Härryda</em></span>
           </footer>
         </article>
       </div>
@@ -492,8 +500,8 @@ section{scroll-margin-top:96px}
   <section class="section" id="preorder" aria-labelledby="cta-title" style="padding-top:1rem">
     <div class="container">
       <div class="cta-banner reveal">
-        <h2 id="cta-title">Ready to turn your trash into treasure?</h2>
-        <a class="btn btn-white" href="#contact">Pre-Order TTT</a>
+        <h2 id="cta-title" data-i18n="cta.title">Ready to turn your trash into treasure?</h2>
+        <a class="btn btn-white" href="#contact" data-i18n="cta.btn">Pre-Order TTT</a>
       </div>
     </div>
   </section>
@@ -505,13 +513,13 @@ section{scroll-margin-top:96px}
   <div class="container footer-grid">
     <div class="footer-brand">
       <svg class="logo-badge" role="img" aria-label="TTT logo"><use href="#logo-badge"/></svg>
-      <p>© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden<br/>
+      <p data-i18n-html="foot.line">© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden<br/>
       <a href="mailto:hello@ttt-hsi.se" style="color:var(--teal);font-weight:600">hello@ttt-hsi.se</a></p>
     </div>
     <nav class="footer-links" aria-label="Footer">
-      <a href="#top">Privacy</a>
-      <a href="#top">Terms</a>
-      <a href="mailto:hello@ttt-hsi.se">Contact</a>
+      <a href="#top" data-i18n="foot.privacy">Privacy</a>
+      <a href="#top" data-i18n="foot.terms">Terms</a>
+      <a href="mailto:hello@ttt-hsi.se" data-i18n="nav.contact">Contact</a>
     </nav>
   </div>
 </footer>
@@ -520,17 +528,208 @@ section{scroll-margin-top:96px}
 <div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-title">
   <div class="modal-backdrop" data-close></div>
   <div class="modal-panel">
-    <button class="modal-close" type="button" data-close aria-label="Close demo">×</button>
+    <button class="modal-close" type="button" data-close data-i18n-attr="aria-label" data-i18n-key="modal.close" aria-label="Close demo">×</button>
     <svg class="logo-badge" role="img" aria-label="TTT logo"><use href="#logo-badge"/></svg>
-    <h3 id="demo-title">Product demo</h3>
-    <p>Our 60-second TTT demo video is on its way. Drop it on the lid — watch the lights, hear the tone, find the bin. Launching with the first pre-order batch.</p>
-    <a class="btn btn-primary" href="#preorder" data-close>Pre-Order TTT</a>
+    <h3 id="demo-title" data-i18n="modal.title">Product demo</h3>
+    <p data-i18n="modal.p">Our 60-second TTT demo video is on its way. Drop it on the lid — watch the lights, hear the tone, find the bin. Launching with the first pre-order batch.</p>
+    <a class="btn btn-primary" href="#preorder" data-close data-i18n="cta.btn">Pre-Order TTT</a>
   </div>
 </div>
 
 <script>
 (function () {
   "use strict";
+
+  /* ---------- i18n: EN / SV ---------- */
+  var I18N = {
+    en: {
+      docTitle: "TTT – Trash to Treasure · AI Smart Waste-Sorting Lid by HSI",
+      metaDesc: "TTT is HSI's AI-powered smart lid that sorts your waste automatically — no app, no menus, just clear signals. Pre-order today.",
+      "brand.tag": "Trash to Treasure by HSI",
+      "nav.overview": "Overview",
+      "nav.features": "Features",
+      "nav.how": "How It Works",
+      "nav.delivery": "Delivery",
+      "nav.contact": "Contact",
+      "nav.preorder": "Pre-Order",
+      "hero.eyebrow": "AI-Powered · Made by HSI, Sweden",
+      "hero.title": "Sort Waste. Save the Planet. <span class=\"grad-text\">Automatically.</span>",
+      "hero.lead": "TTT is the AI-powered lid that tells you exactly where every piece of trash belongs — no app, no menus, just clear signals.",
+      "hero.cta": "Pre-Order Now",
+      "hero.demo": "Watch Demo",
+      "hero.t1": "Ships in 1 week",
+      "hero.t2": "2-year warranty",
+      "hero.t3": "20% recycled build",
+      "hero.artLabel": "TTT smart lid with a central AI sensor and green, orange and red indicator lights",
+      "feat.eyebrow": "Features",
+      "feat.title": "Intelligent by design. <span class=\"grad-text\">Effortless by default.</span>",
+      "feat.sub": "Every part of TTT is built around one idea: making the right sorting decision the easiest one.",
+      "f1.t": "AI Sorting Engine",
+      "f1.d": "Recognises waste type in real-time and auto-updates its model.",
+      "f2.t": "Zero-UI Feedback",
+      "f2.d": "Colours, sounds &amp; lights guide you. No screens, no apps.",
+      "f3.t": "Auto-Updates",
+      "f3.d": "The AI system upgrades itself over the air.",
+      "f4.t": "20% Recycled Materials",
+      "f4.d": "Built with sustainability in mind.",
+      "f5.t": "Human-Rights Certified",
+      "f5.d": "Ethical supply chain, verified production.",
+      "f6.t": "2-Year Warranty",
+      "f6.d": "12 months HSI support + full 2-year guarantee.",
+      "f6.tag": "Included in price",
+      "how.eyebrow": "How It Works",
+      "how.title": "Three steps. <span class=\"grad-text\">Zero thinking.</span>",
+      "how.sub": "The whole sorting decision takes under a second — and never leaves your hands.",
+      "s1.t": "Drop it on the lid",
+      "s1.d": "Place any item on the TTT lid. The onboard sensor wakes up instantly.",
+      "s2.t": "AI identifies the material",
+      "s2.d": "The sorting engine classifies the material and waste stream in real-time.",
+      "s3.t": "Light + sound tells you the bin",
+      "s3.d": "A clear colour and tone point you straight to the right bin. Done.",
+      "del.eyebrow": "Delivery &amp; Specs",
+      "del.title": "Everything included. <span class=\"grad-text\">Nothing hidden.</span>",
+      "del.h3": "What comes in the box — and behind it",
+      "d1.a": "Delivery",
+      "d1.b": "Within 1 week · Free shipping · Instant tracking",
+      "d2.a": "Support",
+      "d2.b": "12 months from HSI",
+      "d3.a": "Warranty",
+      "d3.b": "2 years, full coverage",
+      "d4.a": "Materials",
+      "d4.b": "≥ 20% recyclable content",
+      "d5.a": "In the box",
+      "d5.b": "Setup manual + user guide",
+      "d6.a": "Ethics",
+      "d6.b": "Human-rights-compliant production",
+      "proof.eyebrow": "Early Voices",
+      "proof.title": "What beta users are saying",
+      "q1.t": "Finally, recycling that doesn't require a PhD.",
+      "q1.who": "Beta user",
+      "q1.role": "Household pilot, Gothenburg",
+      "q2.t": "Our kitchen waste sorting accuracy went from 60% to 97%.",
+      "q2.who": "Office manager",
+      "q2.role": "Corporate pilot, Härryda",
+      "cta.title": "Ready to turn your trash into treasure?",
+      "cta.btn": "Pre-Order TTT",
+      "foot.line": "© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sweden<br/><a href=\"mailto:hello@ttt-hsi.se\" style=\"color:var(--teal);font-weight:600\">hello@ttt-hsi.se</a>",
+      "foot.privacy": "Privacy",
+      "foot.terms": "Terms",
+      "modal.title": "Product demo",
+      "modal.p": "Our 60-second TTT demo video is on its way. Drop it on the lid — watch the lights, hear the tone, find the bin. Launching with the first pre-order batch.",
+      "modal.close": "Close demo"
+    },
+    sv: {
+      docTitle: "TTT – Sopor till Skatt · AI-lokk för avfallssortering av HSI",
+      metaDesc: "TTT är HSIs AI-lokk som sorterar ditt avfall automatiskt — ingen app, inga menyer, bara tydliga signaler. Förbeställ idag.",
+      "brand.tag": "Sopor till Skatt av HSI",
+      "nav.overview": "Översikt",
+      "nav.features": "Funktioner",
+      "nav.how": "Så fungerar det",
+      "nav.delivery": "Leverans",
+      "nav.contact": "Kontakt",
+      "nav.preorder": "Förbeställ",
+      "hero.eyebrow": "AI-driven · Tillverkad av HSI, Sverige",
+      "hero.title": "Sortera sopor. Rädda planeten. <span class=\"grad-text\">Automatiskt.</span>",
+      "hero.lead": "TTT är locket med AI som visar exakt var varje avfallstyp hör hemma — ingen app, inga menyer, bara tydliga signaler.",
+      "hero.cta": "Förbeställ nu",
+      "hero.demo": "Se demovideo",
+      "hero.t1": "Leverans inom 1 vecka",
+      "hero.t2": "2 års garanti",
+      "hero.t3": "20% återvunnet material",
+      "hero.artLabel": "TTT smartlokk med central AI-sensor och gröna, orangea och röda indikatorljus",
+      "feat.eyebrow": "Funktioner",
+      "feat.title": "Intelligent i grunden. <span class=\"grad-text\">Obemärkt i bruk.</span>",
+      "feat.sub": "Varje del av TTT är byggd kring en enda idé: att göra rätt sortsbeslut till det enklaste.",
+      "f1.t": "AI-sortsengine",
+      "f1.d": "Identifierar avfallstyp i realtid och uppdaterar sin modell automatiskt.",
+      "f2.t": "Utan skärm eller app",
+      "f2.d": "Färger, ljud och ljus guidar dig. Inga skärmar, inga appar.",
+      "f3.t": "Automatiska uppdateringar",
+      "f3.d": "AI-systemet uppgraderas själv via OTA.",
+      "f4.t": "20% återvunnet material",
+      "f4.d": "Tillverkat med hållbarhet i fokus.",
+      "f5.t": "Certifierad för mänskliga rättigheter",
+      "f5.d": "Etisk leverantörskedja, verifierad produktion.",
+      "f6.t": "2 års garanti",
+      "f6.d": "12 månader support från HSI + full garanti i 2 år.",
+      "f6.tag": "Inkluderat i priset",
+      "how.eyebrow": "Så fungerar det",
+      "how.title": "Tre steg. <span class=\"grad-text\">Noll eftertanke.</span>",
+      "how.sub": "Hela sortsbeslutet tar under en sekund — och kräver aldrig händerna.",
+      "s1.t": "Lägg det på locket",
+      "s1.d": "Placera valfritt föremål på TTT-locket. Sensorn vaknar omedelbart.",
+      "s2.t": "AI:n känner igen materialet",
+      "s2.d": "Sorteringsmotorn klassar materialet och rätt avfallsström i realtid.",
+      "s3.t": "Ljus + ton visar rätt soptunna",
+      "s3.d": "En tydlig färg och ton pekar rakt på rätt soptunna. Klart.",
+      "del.eyebrow": "Leverans &amp; specifikationer",
+      "del.title": "Allt ingår. <span class=\"grad-text\">Inget dolt.</span>",
+      "del.h3": "Vad som ligger i lådan — och bakom det",
+      "d1.a": "Leverans",
+      "d1.b": "Inom 1 vecka · Fri frakt · Omedelbar spårning",
+      "d2.a": "Support",
+      "d2.b": "12 månader från HSI",
+      "d3.a": "Garanti",
+      "d3.b": "2 år, full täckning",
+      "d4.a": "Material",
+      "d4.b": "Minst 20% återvunnet innehåll",
+      "d5.a": "I lådan",
+      "d5.b": "Installationsmanual + användarguide",
+      "d6.a": "Etik",
+      "d6.b": "Produktion i enlighet med mänskliga rättigheter",
+      "proof.eyebrow": "Tidiga röster",
+      "proof.title": "Vad beta-användare säger",
+      "q1.t": "Slutligen, återvinning som inte kräver en filosofiexamen.",
+      "q1.who": "Beta-användare",
+      "q1.role": "Hushållspilot, Göteborg",
+      "q2.t": "Vår sorteringsprecision i köket gick från 60 % till 97 %.",
+      "q2.who": "Kontorschef",
+      "q2.role": "Företagspilot, Härryda",
+      "cta.title": "Redo att förvandla dina sopor till skatt?",
+      "cta.btn": "Förbeställ TTT",
+      "foot.line": "© 2026 HSI – Hulebäcks Speciella Ingenjörer · Härryda, Sverige<br/><a href=\"mailto:hello@ttt-hsi.se\" style=\"color:var(--teal);font-weight:600\">hello@ttt-hsi.se</a>",
+      "foot.privacy": "Sekretess",
+      "foot.terms": "Villkor",
+      "modal.title": "Produktdemonstration",
+      "modal.p": "Vår 60-sekunders demovideo för TTT är på väg. Lägg det på locket — titta på ljusen, hör tonen, hitta soptunnan. Släpps med första förbeställningspartiet.",
+      "modal.close": "Stäng demovideo"
+    }
+  };
+
+  function applyLang(lang) {
+    if (!I18N[lang]) lang = "en";
+    var dict = I18N[lang];
+    document.documentElement.setAttribute("lang", lang);
+    document.title = dict.docTitle;
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", dict.metaDesc);
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-html");
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
+      var attr = el.getAttribute("data-i18n-attr");
+      var key = el.getAttribute("data-i18n-key");
+      if (dict[key] !== undefined) el.setAttribute(attr, dict[key]);
+    });
+    document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+      var active = btn.getAttribute("data-lang") === lang;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    try { localStorage.setItem("ttt-lang", lang); } catch (e) { /* ignore */ }
+  }
+
+  var savedLang = "en";
+  try { savedLang = localStorage.getItem("ttt-lang") || "en"; } catch (e) { /* ignore */ }
+  applyLang(savedLang);
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () { applyLang(btn.getAttribute("data-lang")); });
+  });
 
   /* ---------- Navbar glass on scroll ---------- */
   var header = document.getElementById("site-header");
