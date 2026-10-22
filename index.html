@@ -169,6 +169,12 @@ ul{list-style:none}
 .specs-list strong{display:block;font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}
 .specs-list span{font-size:.95rem;font-weight:600}
 @media(max-width:680px){.specs-list{grid-template-columns:1fr}.specs-card{padding:2rem 1.4rem}}
+.specs-drawing{margin-top:2.2rem;padding:1.6rem;display:flex;flex-direction:column;gap:1rem;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:var(--radius);background:var(--panel);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+.specs-drawing img{width:100%;height:auto;border-radius:12px;background:#fff;border:1px solid var(--line);display:block}
+.specs-drawing figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem}
+.specs-drawing figcaption span{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.82rem;color:var(--muted)}
+.specs-drawing figcaption small{color:var(--dim);font-size:.82rem}
+@media(max-width:680px){.specs-drawing{padding:1.1rem;caption-side:bottom}}
 /* ---------- quotes ---------- */
 .quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
 .quote{padding:2.1rem 1.9rem;position:relative}
@@ -595,6 +601,13 @@ ul{list-style:none}
         </li>
       </ul>
     </div>
+    <figure class="specs-drawing reveal" style="--d:.15s">
+      <img src="ttd_drawing.png" alt="Engineering drawing of the TTT rotating bin — front and side views, section A-A (1:15) and section B-B (1:15), with parts list and title block." loading="lazy"/>
+      <figcaption>
+        <span data-i18n="spec.drawing">Technical drawing</span>
+        <small data-i18n="spec.drawingCap">Front · side · section A-A (1:15) · section B-B (1:15) · parts list</small>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -727,6 +740,7 @@ ul{list-style:none}
       "spec.d4a":"Materials","spec.d4b":"≥ 20% reusable/recyclable",
       "spec.d5a":"Includes","spec.d5b":"Installation manual + User guide",
       "spec.d6a":"Production","spec.d6b":"Human-rights compliant",
+"spec.drawing":"Technical drawing","spec.drawingCap":"Front · side · section A-A (1:15) · section B-B (1:15) · parts list",
       "proof.eyebrow":"Early feedback","proof.title":"People who tried it, <span class='grad'>kept it</span>",
       "proof.q1t":"Finally, recycling that doesn't require a PhD. I drop it in and walk away — it just works.","proof.q1a":"Beta user","proof.q1b":"Home pilot program, Spring 2026",
       "proof.q2t":"Our sorting accuracy went from 60% to 97%. The rotating bin paid for itself in fewer missed collections.","proof.q2a":"Office manager","proof.q2b":"32-person office, Gothenburg",
@@ -767,6 +781,7 @@ ul{list-style:none}
       "spec.d4a":"Material","spec.d4b":"Minst 20 % återvunnet/återvinningsbart",
       "spec.d5a":"Innehållet","spec.d5b":"Monteringsmanual + Användarguide",
       "spec.d6a":"Produktion","spec.d6b":"I enlighet med mänskliga rättigheter",
+"spec.drawing":"Teknisk ritning","spec.drawingCap":"Främre · sidovyn · snitt A-A (1:15) · snitt B-B (1:15) · delarlista",
       "proof.eyebrow":"Tidiga omdömen","proof.title":"De som testade det, <span class='grad'>höll kvar</span>",
       "proof.q1t":"Slutligen, återvinning som inte kräver en forskarutbildning. Jag slänger i och går — det fungerar bara.","proof.q1a":"Beta-användare","proof.q1b":"Bostadspilotprogram, vår 2026",
       "proof.q2t":"Vår sortingsprecision steg från 60 % till 97 %. Den roterande tunnan betald sig genom färre missade hämtningsdagar.","proof.q2a":"Kontorschef","proof.q2b":"Kontor med 32 personer, Göteborg",
